@@ -1,0 +1,149 @@
+.container{
+    padding: 50px;
+}
+.tile{
+    background: white;
+    padding: 0 32px 30px 32px;
+    margin-bottom: 8px;
+}
+.tile-header{
+    font-size: 16px;
+    color: #333333;
+    line-height: 68px;
+}
+.tile-content{
+    border: 2px solid #eef2f5;
+    border-radius: 3px;
+    padding: 20px 30px;
+    font-size: 14px;
+    color: #666666;
+}
+
+
+.mr-40 {
+    margin-right: 40px;
+}
+.mr-30 {
+    margin-right: 30px;
+}
+.mr-20 {
+    margin-right: 20px;
+}
+.mr-15 {
+    margin-right: 15px;
+}
+.mr-10 {
+    margin-right: 10px;
+}
+.mr-5 {
+    margin-right: 5px;
+}
+.mt-50 {
+    margin-top: 50px;
+}
+.mt-45 {
+    margin-top: 45px;
+}
+.mt-40 {
+    margin-top: 40px;
+}
+.mt-30 {
+    margin-top: 30px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mt-15 {
+    margin-top: 15px;
+}
+.mt-10 {
+    margin-top: 10px;
+}
+.mt-5 {
+    margin-top: 5px;
+}
+.mt-0 {
+    margin-top: 0px;
+}
+.mb-50 {
+    margin-bottom: 50px;
+}
+.mb-40 {
+    margin-bottom: 40px;
+}
+.mb-30 {
+    margin-bottom: 30px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.mb-15 {
+    margin-bottom: 15px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+.mb-0 {
+    margin-bottom: 0px;
+}
+.ml-40 {
+    margin-left: 40px;
+}
+.ml-30 {
+    margin-left: 30px;
+}
+.ml-20 {
+    margin-left: 20px;
+}
+.ml-15 {
+    margin-left: 15px;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+
+.test-grid{
+    height: 30px;
+    background: #ccc;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #0099ff;
+    border-radius: 3px;
+}
+
+pre {
+    display: block;
+    padding: 0;
+    margin: 0;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.syntaxhighlighter,.ie.syntaxhighlighter{
+    padding: 10px!important;
+    border-radius: 3px;
+    overflow: hidden!important;
+}
+
+.iconItem{
+    display: inline-block;
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.iconItem i.fa{
+    color: #006600;
+    padding: 5px;
+}
+
+.tile .cm-accordion-menu{
+    position: relative!important;
+}
+
+.cm-accordion-menu ul>li .submenu{
+    color: white;
+    padding: 10px;
+    float: left;
+}

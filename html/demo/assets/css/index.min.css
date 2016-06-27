@@ -1,0 +1,11 @@
+.desktop-wrap {
+    left: 200px;
+    top: 0;
+    overflow-y: auto;
+    overflow-x: hidden
+}
+
+.desktop-wrap #desktop {
+    width: 100%;
+    height: 100%
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="../../../assets/theme/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../../assets/theme/font-awesome.min.css"/>
+
+    <style>
+        *{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        body{
+            margin: 50px;
+        }
+        .clock-container{
+            position: relative;
+            width: 216px;
+            padding: 15px;
+            background-color: #ABAAAF;
+        }
+        .clock-face{
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            border-radius: 160px;
+            border: 2px solid #fff;
+            background-color: #333;
+            position: relative;
+        }
+        .clock-face .clock-numbers,
+        .clock-face .click-hands{
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            left: 10px;
+            top: 8px;
+        }
+        .clock-face .click-hands{
+            left: 3px;
+        }
+        .clock-face .clock-numbers span{
+            display: inline-block;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            text-align: center;
+            cursor: default;
+            color: white;
+        }
+        .click-hands .hourHand,
+        .click-hands .minuteHand,
+        .click-hands .secondHand{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 3px;
+            background-color: white;
+            -webkit-transform-origin: 8px center;
+            -moz-transform-origin: 8px center;
+            -ms-transform-origin: 8px center;
+            -o-transform-origin: 8px center;
+            transform-origin: 8px center;
+            -webkit-transform: rotateZ(-90deg);
+            -moz-transform: rotateZ(-90deg);
+            -ms-transform: rotateZ(-90deg);
+            -o-transform: rotateZ(-90deg);
+            transform: rotateZ(-90deg);
+            -webkit-transition: transform 0.5s;
+            -moz-transition: transform 0.5s;
+            -ms-transition: transform 0.5s;
+            -o-transition: transform 0.5s;
+            transition: transform 0.5s;
+        }
+        .click-hands .hourHand{
+            width: 40px;
+            background-color: #0074D9;
+        }
+
+        .click-hands .minuteHand{
+            width: 50px;
+            background-color: red;
+        }
+
+        .click-hands .secondHand{
+            width: 60px;
+            background-color: yellow;
+        }
+        .spinners{
+            margin-top: 20px;
+        }
+        .spinner{
+            width: 56px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            height: 30px;
+            background-color: white;
+            position: relative;
+            display: inline-block;
+            padding-right: 20px;
+            margin: 0 3px;
+        }
+        .spinner span{display: inline-block;}
+        .spinner .spinner-plus,
+        .spinner .spinner-subs{
+            position: absolute;
+            height: 50%;
+            width: 20px;
+            background-color: whitesmoke;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .spinner i{
+            position: relative;
+            top: -3px;
+        }
+        .spinner .spinner-plus{
+            top: 0;
+            right: -1px;
+        }
+        .spinner .spinner-subs{
+            bottom: 0;
+            right: -1px;
+        }
+        .spinner .spinner-value{
+            width: 100%;
+            height: 100%;
+            line-height: 30px;
+            padding-left: 5px;
+        }
+
+        .clock-close{
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            cursor: pointer;
+        }
+    </style>
+
+    <!--[if lt IE 9]>
+    <style>
+        .click-hands .hourHand,
+        .click-hands .minuteHand,
+        .click-hands .secondHand{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <![endif]-->
+</head>
+<body>
+
+
+<div id="clock">
+
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../../assets/lib/es5-shim.min.js"></script>
+<script src="../../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<script src="../../../assets/lib/require.js"></script>
+<script src="../../../assets/dist/config.js"></script>
+
+<script>
+    require(["Clock","react"], function(Clock, React){
+        var bom = React.createElement(Clock, {value: "2016-04-06 00:10:00"});
+        var dt = React.render(bom, document.querySelector("#clock"));
+    });
+</script>
+</body>
+</html>

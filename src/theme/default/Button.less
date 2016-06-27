@@ -1,0 +1,132 @@
+
+@primary-bg: #337ab7;
+@success-bg: #5cb85c;
+@info-bg: #5bc0de;
+@warning-bg: #f0ad4e;
+@danger-bg: #d9534f;
+
+a,
+a:hover,
+a:link,
+a:visited{
+    text-decoration: none;
+    color: #333;
+}
+a:focus{
+  outline: none;
+}
+.cm-button {
+  position: relative;
+  padding: 4px 15px;
+  -webkit-user-select: none;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  color: #000;
+  border-radius: 2px;
+  background: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  -webkit-transition: background,-webkit-box-shadow 0.2s linear;
+  -moz-transition: background,-moz-box-shadow 0.2s linear;
+  -ms-transition: background,box-shadow 0.2s linear;
+  -o-transition: background,box-shadow 0.2s linear;
+  transition: background,box-shadow 0.2s linear;
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+
+  &.raised{
+    -webkit-box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+    box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+  }
+  i.fa{
+    &.left {
+      margin-right: 5px;
+    }
+    &.right {
+      margin-left: 5px;
+    }
+  }
+  &.cm-iconButton{
+    padding: 0;
+    overflow: visible;
+    box-sizing: border-box;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    i.fa{
+      overflow: hidden;
+      &.left,
+      &.right{
+        margin: 0;
+      }
+    }
+
+    &:hover{
+      background: transparent;
+    }
+  }
+
+  &:hover{
+    background: rgba(153,153,153,.2);
+  }
+
+  &.primary{
+    color: #fff;
+    background-color: @primary-bg;
+    border-color: #2e6da4;
+    &:hover{
+      background-color: lighten(@primary-bg, 10%);
+    }
+  }
+  &.success{
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    &:hover{
+      background-color: lighten(@success-bg, 10%);
+    }
+  }
+  &.info{
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    &:hover{
+      background-color: lighten(@info-bg, 10%);
+    }
+  }
+  &.warning{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    &:hover{
+      background-color: lighten(@warning-bg, 10%);
+    }
+  }
+  &.danger{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    &:hover{
+      background-color: lighten(@danger-bg, 10%);
+    }
+  }
+
+  &[disabled]{
+    color: rgba(0,0,0,0.3);
+    cursor: default;
+    background: transparent;
+    &:hover{
+      background: transparent;
+    }
+    i.fa{
+      color: rgba(0,0,0,0.3);
+    }
+  }
+}

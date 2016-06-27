@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="../../../assets/theme/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../../assets/theme/font-awesome.min.css"/>
+
+    <style>
+        *{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        body{
+            margin: 50px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="form-group form-group-sm ">
+    <input class="form-control">
+</div>
+<div id="datetime">
+
+</div>
+<div id="date">
+
+</div>
+<div id="clock">
+
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../../assets/lib/es5-shim.min.js"></script>
+<script src="../../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<script src="../../../assets/lib/require.js"></script>
+<script src="../../../assets/dist/config.js"></script>
+
+<script>
+    require(["DateTime","react"], function(DateTime, React){
+        var bom = React.createElement(DateTime, {view: "datetime", className: "", startDate: "2016-04-05", endDate: "2016-04-15"});
+        var dt = React.render(bom, document.querySelector("#datetime"));
+
+        dt.on("selectDate", function(date){
+            console.log(date);
+        });
+
+        var bom1 = React.createElement(DateTime, {view: "time",value: "2016-04-06 00:00:00"});
+        var dt1 = React.render(bom1, document.querySelector("#clock"));
+
+        var bom2 = React.createElement(DateTime, {view: "date"});
+        var dt2 = React.render(bom2, document.querySelector("#date"));
+        dt2.setStartDate("2016-04-05");
+        dt2.setEndDate("2016-04-25");
+        dt2.setValue("2016-04-07");
+        console.log(dt2.getValue());
+    });
+</script>
+</body>
+</html>

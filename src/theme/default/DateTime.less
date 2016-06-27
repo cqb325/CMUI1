@@ -1,0 +1,193 @@
+@grey-text: #333;
+@disabled-text: #ccc;
+
+@border-radius: 3px;
+@highlight-color: #FFE684;
+
+
+.cm-datetime{
+  display: inline-block;
+  position: relative;
+
+  .cm-datetime-wrap{
+    overflow: hidden;
+    position: absolute;
+    top: 31px;
+    left: 0;
+    z-index: 10;
+    padding: 5px;
+    background: whitesmoke;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    display: none;
+  }
+  &.cm-dateRange{
+    .cm-datetime-wrap{
+      width: 452px;
+    }
+    .date-text{
+      width: auto;
+    }
+  }
+  .tools-info{
+    font-size: 12px;
+    padding: 3px 20px;
+    border-bottom: 1px solid #ccc;
+
+    .date-range-shortcut{
+      margin-left: 10px;
+      color: gray;
+    }
+  }
+  .date-picker{
+    display: inline-block;
+    width: 216px;
+    min-height: 215px;
+    font-size: 12px;
+    float: left;
+    &:nth-child(2){
+      margin-left: 10px;
+    }
+  }
+  &.dropup{
+    .cm-datetime-wrap{
+      top: auto;
+      bottom: 31px;
+    }
+  }
+  .date-text{
+    padding: 4px 30px 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: @border-radius;
+    color: @grey-text;
+    width: 100%;
+    min-width: 150px;
+    display: inline-block;
+    background-color: #fff;
+    background-image: none;
+    transition: border-color ease-in-out .15s;
+    cursor: pointer;
+  }
+
+  &.disabled{
+    cursor: default;
+    .date-text{
+      cursor: default;
+    }
+  }
+
+  i.fa-calendar{
+    position: absolute;
+    right: 6px;
+    top: 9px;
+  }
+
+  .date-picker-header{
+    padding: 2px 4px;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    a{
+      display: inline-block;
+      padding: 4px;
+      color: @grey-text;
+      text-decoration: none;
+      &.year,
+      &.month{
+        padding: 4px 10px;
+        border-radius: @border-radius;
+        width: 65px;
+        :hover{
+          background: #fff;
+        }
+      }
+      &.prev{float: left; cursor: pointer;}
+      &.next{float: right; cursor: pointer;}
+    }
+  }
+
+  .inner{
+    margin-bottom: 5px;
+    white-space: normal;
+  }
+
+  .week,
+  .month,
+  .year,
+  button.day{
+    width: 27px;
+    padding: 4px 0;
+    margin: 1px;
+    color: @grey-text;
+    text-align: center;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    border-radius: @border-radius;
+    outline: none;
+  }
+  .week{
+    border: none;
+    background: none;
+    cursor: default;
+    color: #aaa;
+  }
+  .month{
+    cursor: pointer;
+    width: 49px;
+    padding: 10px 0;
+    &.disabled{
+      color: @disabled-text;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+  .year{
+    cursor: pointer;
+    width: 39px;
+    padding: 8px 0;
+  }
+
+  button.day{
+    &.today,
+    &:hover,
+    &.rangeSelect{
+      background-color: @highlight-color;
+    }
+    &.disabled,
+    &.gray{
+      color: @disabled-text;
+    }
+    &.disabled{
+      pointer-events: none;
+      cursor: default;
+    }
+    &.empty{
+      visibility: hidden;
+    }
+  }
+
+  .date-picker-footer{
+    text-align: center;
+    margin-bottom: 5px;
+    a{
+      color: #555;
+      text-decoration: none;
+      padding: 4px 15px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+  .date-picker-footer a:hover,
+  .month:hover,
+  .year:hover{
+    background-color: #fff;
+  }
+}
+
+.invalid {
+  .cm-datetime .date-text{
+    border-color: #E05B5B;
+  }
+}
