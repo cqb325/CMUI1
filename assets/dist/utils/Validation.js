@@ -80,6 +80,11 @@ define(['module', 'utils/strings'], function (module, strings) {
                 );
             },
 
+            mobile: function mobile(value, param) {
+                return (/^1[3-8][0-9]{9}$/.test(value)
+                );
+            },
+
             /**
              * 汉字为一个字符
              * @param value
@@ -117,6 +122,7 @@ define(['module', 'utils/strings'], function (module, strings) {
             idCard: "请填写正确的身份证号码",
             noSpecial: "不能输入特殊字符",
             userName: "只能输入汉字字母和数字",
+            mobile: "请输入合法的手机号",
             mixMaxLength: format("不能超过{0}个字符")
         }
     };
