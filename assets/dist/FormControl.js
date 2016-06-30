@@ -264,24 +264,21 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                 }
                 console.log(value);
 
+                if (rules["required"]) {
+                    rule = { method: "required", parameters: rules["required"] };
+                    result = this.validByMethod(value, rule, messages);
+                    if (result == false) {
+                        return false;
+                    }
+                }
                 for (var method in rules) {
-                    rule = { method: method, parameters: rules[method] };
-
-                    if (!Validation.methods[method]) {
-                        console.error("验证中缺少" + method + "方法");
+                    if (method === "required") {
                         continue;
                     }
-                    result = Validation.methods[method].call(this, value, rule.parameters);
+                    rule = { method: method, parameters: rules[method] };
+
+                    result = this.validByMethod(value, rule, messages);
                     if (result == false) {
-                        errorTip = messages && messages[method] ? messages[method] : Validation.messages[method];
-                        if (typeof errorTip === 'function') {
-                            errorTip = errorTip.call(null, rule.parameters);
-                        }
-                        this.setState({ errorTip: errorTip });
-                        if (this.props.onValid) {
-                            this.props.onValid(value, result, this);
-                        }
-                        this.emit("valid", value, result, this);
                         return false;
                     }
                 }
@@ -293,6 +290,30 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
 
                 this.setState({ errorTip: null });
                 return true;
+            }
+        }, {
+            key: "validByMethod",
+            value: function validByMethod(value, rule, messages) {
+                var method = rule.method;
+                if (!Validation.methods[method]) {
+                    console.error("验证中缺少" + method + "方法");
+                    return;
+                }
+                var result = Validation.methods[method].call(this, value, rule.parameters);
+                var errorTip;
+                if (result == false) {
+                    errorTip = messages && messages[method] ? messages[method] : Validation.messages[method];
+                    if (typeof errorTip === 'function') {
+                        errorTip = errorTip.call(null, rule.parameters);
+                    }
+                    this.setState({ errorTip: errorTip });
+                    if (this.props.onValid) {
+                        this.props.onValid(value, result, this);
+                    }
+                    this.emit("valid", value, result, this);
+                }
+
+                return result;
             }
         }, {
             key: "renderErrorTip",

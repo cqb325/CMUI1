@@ -27,6 +27,8 @@ const Progress = require('../../html/demo/pages/Progress');
 const DateRange = require('../../html/demo/pages/DateRange');
 const Tab = require('../../html/demo/pages/Tab');
 const Toast = require('../../html/demo/pages/Toast');
+const Panel = require('../../html/demo/pages/Panel');
+const MessageBox = require('../../html/demo/pages/MessageBox');
 
 const ReactRouter = require('ReactRouter');
 const Router = ReactRouter.Router;
@@ -67,7 +69,11 @@ const APP = {
         {id:"11", text: "Progress",icon: "fa fa-minus",link: "Progress", component: Progress},
         {id:"12", text: "DateRange",icon: "fa fa-clock-o",link: "DateRange", component: DateRange},
         {id:"13", text: "Tab",icon: "fa fa-folder",link: "Tab", component: Tab},
-        {id:"14", text: "Toast",icon: "fa fa-cog",link: "Toast", component: Toast}
+        {id:"14", text: "Toast",icon: "fa fa-cog",link: "Toast", component: Toast},
+        {id:"15", text: "Panel",icon: "fa fa-folder", children: [
+            {id:"151", text: "Panel",icon: "fa fa-folder",link: "Panel", component: Panel},
+            {id:"152", text: "MessageBox",icon: "fa fa-folder",link: "MessageBox", component: MessageBox}
+        ]}
     ]
 };
 

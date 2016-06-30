@@ -61,6 +61,12 @@ a:focus {
 .cm-button:hover {
   background: rgba(153, 153, 153, 0.2);
 }
+.cm-button.flat {
+  padding: 0 5px !important;
+  -webkit-box-shadow: initial;
+  -moz-box-shadow: initial;
+  box-shadow: initial;
+}
 .cm-button.primary {
   color: #fff;
   background-color: #337ab7;

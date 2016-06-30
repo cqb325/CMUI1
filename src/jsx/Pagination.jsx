@@ -357,7 +357,7 @@ class Pagination extends BaseComponent {
         }
 
         return (
-            <div className="data-page pull-right mt-30">
+            <div className="data-page pull-right mt-10">
                 <ul className="pagination" style={{float: "left"}}>
                     <PagePrev current={current} onClick={this._prev.bind(this, null)}/>
                     {pagerList}

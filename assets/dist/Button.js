@@ -116,7 +116,8 @@ define(["module", "react", "classnames", "core/BaseComponent", 'FontIcon', 'inte
             value: function render() {
                 var className = classnames(this.props.className, 'cm-button', this.state.theme, {
                     "cm-iconButton": this.props.iconButton,
-                    raised: this.props.raised && this.state.raised
+                    raised: this.props.raised && this.state.raised,
+                    flat: this.props.flat
                 });
 
                 var link = this.props.href || "javascript:void(0)";

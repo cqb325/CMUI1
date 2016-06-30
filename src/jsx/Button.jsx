@@ -88,7 +88,8 @@ class Button extends BaseComponent {
             this.state.theme,
             {
                 "cm-iconButton": this.props.iconButton,
-                raised: this.props.raised && this.state.raised
+                raised: this.props.raised && this.state.raised,
+                flat: this.props.flat
             }
         );
 

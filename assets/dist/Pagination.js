@@ -404,7 +404,7 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
 
                 return React.createElement(
                     "div",
-                    { className: "data-page pull-right mt-30" },
+                    { className: "data-page pull-right mt-10" },
                     React.createElement(
                         "ul",
                         { className: "pagination", style: { float: "left" } },

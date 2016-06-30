@@ -249,6 +249,12 @@ a:focus {
 .cm-button:hover {
   background: rgba(153, 153, 153, 0.2);
 }
+.cm-button.flat {
+  padding: 0 5px !important;
+  -webkit-box-shadow: initial;
+  -moz-box-shadow: initial;
+  box-shadow: initial;
+}
 .cm-button.primary {
   color: #fff;
   background-color: #337ab7;
@@ -1838,4 +1844,44 @@ a:focus {
   100% {
     opacity: 0.895958333333333;
   }
+}
+.cm-panel {
+  border-radius: 3px;
+  overflow: hidden;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+}
+.cm-panel .cm-panel-title {
+  padding: 7px 15px;
+  border-bottom: 1px solid #ccc;
+}
+.cm-panel .cm-panel-content {
+  padding: 20px;
+}
+.cm-panel .cm-panel-tools.right {
+  float: right;
+}
+.cm-panel .cm-panel-footer {
+  border-top: 1px solid #ccc;
+  padding: 8px 10px;
+  text-align: center;
+}
+.cm-panel.cm-messageBox {
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 50000;
+  min-width: 200px;
+}
+.shadow-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  background: rgba(0, 0, 0, 0.2);
+  filter: alpha(opacity=20);
 }
