@@ -84,6 +84,8 @@ define(["module", "react", "react-dom", "classnames", "core/BaseComponent", 'uti
             _this.action = props.action;
             _this.method = props.method;
             _this.target = props.target;
+            //是否使用默认提交按钮
+            _this.useDefaultSubmitBtn = _this.props.useDefaultSubmitBtn == undefined ? true : _this.props.useDefaultSubmitBtn;
 
             _this.items = {};
 
@@ -192,11 +194,15 @@ define(["module", "react", "react-dom", "classnames", "core/BaseComponent", 'uti
         }, {
             key: "renderSubmit",
             value: function renderSubmit() {
-                return React.createElement(
-                    Button,
-                    { theme: "success", onClick: this.submit.bind(this) },
-                    this.props.submitText || "保 存"
-                );
+                if (this.useDefaultSubmitBtn) {
+                    return React.createElement(
+                        Button,
+                        { theme: "success", onClick: this.submit.bind(this) },
+                        this.props.submitText || "保 存"
+                    );
+                } else {
+                    return null;
+                }
             }
         }, {
             key: "render",
@@ -274,7 +280,13 @@ define(["module", "react", "react-dom", "classnames", "core/BaseComponent", 'uti
          * @attribute layout
          * @type {String}
          */
-        layout: PropTypes.string
+        layout: PropTypes.string,
+        /**
+         * 是否使用默认的提交按钮
+         * @attribute useDefaultSubmitBtn
+         * @type {String/Boolean}
+         */
+        useDefaultSubmitBtn: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
     };
 
     module.exports = Form;

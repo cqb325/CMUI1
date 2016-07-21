@@ -917,14 +917,26 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
                 }
             }
         }, {
+            key: "componentWillReceiveProps",
+            value: function componentWillReceiveProps(nextProps) {
+                if (!shallowEqual(nextProps.data, this.props.data)) {
+                    this.setState({ data: nextProps.data });
+                }
+            }
+        }, {
             key: "loadDynamicJSON",
             value: function loadDynamicJSON(parent, json, cback) {
                 if (typeof parent == "string") {
                     parent = this.getItem(parent);
                 }
                 if (parent) {
-                    parent.children = parent.children ? parent.children.concat(json) : json;
-                    parent._subNodes.updateState(parent.children);
+                    if (parent.children) {
+                        parent.children = parent.children.concat(json);
+                        parent._subNodes.updateState(parent.children);
+                    } else {
+                        parent.children = json;
+                        parent._node.updateState(parent);
+                    }
                     cback ? cback(this) : false;
                 }
             }

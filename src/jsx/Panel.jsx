@@ -115,7 +115,6 @@ class Panel extends BaseComponent {
         className = classnames("cm-panel", className, getGrid(grid));
 
         let headContent = this.renderHeader();
-
         return (
             <div className={className} style={style}>
                 <div className="cm-panel-title">

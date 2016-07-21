@@ -1875,6 +1875,14 @@ a:focus {
   z-index: 50000;
   min-width: 200px;
 }
+.cm-panel.cm-dialog {
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 40000;
+  min-width: 200px;
+}
 .shadow-backdrop {
   position: fixed;
   top: 0;

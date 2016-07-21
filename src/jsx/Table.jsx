@@ -53,7 +53,12 @@ class Table extends BaseComponent {
             cols;
         if(header) {
             cols = header.map(function (col, colIndex) {
-                return (<th key={"header_"+colIndex} className={col.className} width={col.width} name={col.name}>{col.text}</th>);
+                if(col.hide) {
+                    return null;
+                }else{
+                    return (<th key={"header_"+colIndex} className={col.className} width={col.width}
+                                name={col.name}>{col.text}</th>);
+                }
             });
         }
         return (
@@ -78,20 +83,25 @@ class Table extends BaseComponent {
         if(data && data.length && header){
             rows = data.map(function(row, rowIndex){
                 let cells =  header.map(function(col, colIndex){
-                    let value = row[col.name];
-                    value = this._formatData(value, col, row);
-                    if(React.isValidElement(value)){
+                    if(col.hide){
+                        return null;
+                    }else {
+                        let value = row[col.name];
+                        value = this._formatData(value, col, row);
+                        if (React.isValidElement(value)) {
+                            return (
+                                <td key={"cell_"+rowIndex+"_"+colIndex}>
+                                    {value}
+                                </td>
+                            );
+                        }
+
+                        let title = col.tip ? value : null;
                         return (
-                            <td key={"cell_"+rowIndex+"_"+colIndex}>
-                                {value}
-                            </td>
+                            <td key={"cell_"+rowIndex+"_"+colIndex} title={title}
+                                dangerouslySetInnerHTML={{__html: value}}></td>
                         );
                     }
-
-                    let title = col.tip ? value : null;
-                    return (
-                        <td key={"cell_"+rowIndex+"_"+colIndex} title={title} dangerouslySetInnerHTML={{__html: value}}></td>
-                    );
                 }, this);
 
                 return (

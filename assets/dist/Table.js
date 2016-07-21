@@ -90,11 +90,16 @@ define(["module", "react", "Core", "classnames", "core/BaseComponent", "moment"]
                     cols = void 0;
                 if (header) {
                     cols = header.map(function (col, colIndex) {
-                        return React.createElement(
-                            "th",
-                            { key: "header_" + colIndex, className: col.className, width: col.width, name: col.name },
-                            col.text
-                        );
+                        if (col.hide) {
+                            return null;
+                        } else {
+                            return React.createElement(
+                                "th",
+                                { key: "header_" + colIndex, className: col.className, width: col.width,
+                                    name: col.name },
+                                col.text
+                            );
+                        }
                     });
                 }
                 return React.createElement(
@@ -117,18 +122,23 @@ define(["module", "react", "Core", "classnames", "core/BaseComponent", "moment"]
                 if (data && data.length && header) {
                     rows = data.map(function (row, rowIndex) {
                         var cells = header.map(function (col, colIndex) {
-                            var value = row[col.name];
-                            value = this._formatData(value, col, row);
-                            if (React.isValidElement(value)) {
-                                return React.createElement(
-                                    "td",
-                                    { key: "cell_" + rowIndex + "_" + colIndex },
-                                    value
-                                );
-                            }
+                            if (col.hide) {
+                                return null;
+                            } else {
+                                var value = row[col.name];
+                                value = this._formatData(value, col, row);
+                                if (React.isValidElement(value)) {
+                                    return React.createElement(
+                                        "td",
+                                        { key: "cell_" + rowIndex + "_" + colIndex },
+                                        value
+                                    );
+                                }
 
-                            var title = col.tip ? value : null;
-                            return React.createElement("td", { key: "cell_" + rowIndex + "_" + colIndex, title: title, dangerouslySetInnerHTML: { __html: value } });
+                                var title = col.tip ? value : null;
+                                return React.createElement("td", { key: "cell_" + rowIndex + "_" + colIndex, title: title,
+                                    dangerouslySetInnerHTML: { __html: value } });
+                            }
                         }, this);
 
                         return React.createElement(

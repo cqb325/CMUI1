@@ -28,6 +28,8 @@ class Form extends BaseComponent {
         this.action = props.action;
         this.method = props.method;
         this.target = props.target;
+        //是否使用默认提交按钮
+        this.useDefaultSubmitBtn = this.props.useDefaultSubmitBtn == undefined ? true : this.props.useDefaultSubmitBtn;
 
         this.items = {};
 
@@ -153,9 +155,13 @@ class Form extends BaseComponent {
      * @returns {XML}
      */
     renderSubmit(){
-        return(
-            <Button theme="success" onClick={this.submit.bind(this)}>{this.props.submitText || "保 存"}</Button>
-        );
+        if(this.useDefaultSubmitBtn) {
+            return (
+                <Button theme="success" onClick={this.submit.bind(this)}>{this.props.submitText || "保 存"}</Button>
+            );
+        }else{
+            return null;
+        }
     }
 
     render () {
@@ -223,7 +229,13 @@ Form.propTypes = {
      * @attribute layout
      * @type {String}
      */
-    layout: PropTypes.string
+    layout: PropTypes.string,
+    /**
+     * 是否使用默认的提交按钮
+     * @attribute useDefaultSubmitBtn
+     * @type {String/Boolean}
+     */
+    useDefaultSubmitBtn: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 module.exports = Form;

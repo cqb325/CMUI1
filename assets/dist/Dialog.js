@@ -66,38 +66,29 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'uti
     var PropTypes = React.PropTypes;
     var createFragment = React.addons.createFragment;
 
-    var MessageBox = function (_BaseComponent) {
-        _inherits(MessageBox, _BaseComponent);
+    var Dialog = function (_BaseComponent) {
+        _inherits(Dialog, _BaseComponent);
 
-        function MessageBox(props) {
-            _classCallCheck(this, MessageBox);
+        function Dialog(props) {
+            _classCallCheck(this, Dialog);
 
-            var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MessageBox).call(this, props));
+            var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Dialog).call(this, props));
 
             _this.addState({
                 title: props.title || "",
-                msg: props.msg || "",
-                visibility: false,
-                type: props.type || "info"
+                visibility: false
             });
 
-            _this.confirm = _this.confirm.bind(_this);
-            _this.cancle = _this.cancle.bind(_this);
-
-            var components = [React.createElement(
-                Button,
-                { theme: "success", raised: true, icon: "check", onClick: _this.confirm },
-                "确 定"
-            )];
-            if (props.type === "confirm") {
-                components.push(React.createElement(
+            _this.footers = props.footers || {
+                components: [React.createElement(
                     Button,
-                    { theme: "info", raised: true, icon: "close", className: "ml-10", onClick: _this.cancle },
-                    "取 消"
-                ));
-            }
-            _this.footers = {
-                components: components
+                    { theme: "success", raised: true, onClick: _this.btnHandler.bind(_this, true), icon: "save" },
+                    props.okButtonText || "保 存"
+                ), React.createElement(
+                    Button,
+                    { theme: "info", raised: true, onClick: _this.btnHandler.bind(_this, false), icon: "flask", className: "ml-10" },
+                    props.cancleButtonText || "取 消"
+                )]
             };
 
             _this.backdrop = null;
@@ -107,7 +98,7 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'uti
             return _this;
         }
 
-        _createClass(MessageBox, [{
+        _createClass(Dialog, [{
             key: "setData",
             value: function setData(data) {
                 this.data = data;
@@ -118,47 +109,46 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'uti
                 return this.data;
             }
         }, {
-            key: "cancle",
-            value: function cancle() {
-                if (this.state.type === "confirm" && this.props.confirm) {
-                    this.props.confirm.apply(this, [false]);
-                    this.hide();
-                } else {
-                    this.hide();
-                }
+            key: "setTitle",
+            value: function setTitle(title) {
+                this.setState({
+                    title: title
+                });
             }
         }, {
-            key: "hide",
-            value: function hide() {
+            key: "btnHandler",
+            value: function btnHandler(flag) {
+                if (this.props.onConfirm) {
+                    var ret = this.props.onConfirm(flag);
+                    if (ret) {
+                        this.close();
+                    }
+
+                    return ret;
+                }
+
+                this.close();
+                return true;
+            }
+        }, {
+            key: "close",
+            value: function close() {
                 this.setState({
                     visibility: false
                 });
 
-                if (this.props.onHide) {
-                    this.props.onHide();
+                if (this.props.onClose) {
+                    this.props.onClose();
                 }
-                this.emit("hide");
+                this.emit("close");
                 this.backdrop.style.display = "none";
             }
         }, {
-            key: "confirm",
-            value: function confirm() {
-                if (this.state.type === "confirm" && this.props.confirm) {
-                    if (this.props.confirm.apply(this, [true])) {
-                        this.hide();
-                    }
-                } else {
-                    this.hide();
-                }
-            }
-        }, {
-            key: "show",
-            value: function show(msg, title) {
+            key: "open",
+            value: function open() {
                 var _this2 = this;
 
                 this.setState({
-                    title: this.state.title || title,
-                    msg: msg,
                     visibility: true
                 });
 
@@ -182,10 +172,10 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'uti
                     ele.style.marginLeft = -w / 2 + "px";
                     ele.style.marginTop = -h / 2 + "px";
 
-                    if (_this2.props.onShow) {
-                        _this2.props.onShow();
+                    if (_this2.props.onOpen) {
+                        _this2.props.onOpen();
                     }
-                    _this2.emit("show");
+                    _this2.emit("open");
                 }, 0);
             }
         }, {
@@ -195,7 +185,7 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'uti
                 var className = _props.className;
                 var style = _props.style;
 
-                className = classnames("cm-messageBox", className, this.state.type);
+                className = classnames("cm-dialog", className);
                 var props = _extends({}, this.props);
                 props.className = className;
 
@@ -205,14 +195,18 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'uti
 
                 props.footers = this.footers;
 
-                return React.createElement(Panel, _extends({}, props, { content: this.state.msg }));
+                return React.createElement(
+                    Panel,
+                    props,
+                    this.props.children
+                );
             }
         }]);
 
-        return MessageBox;
+        return Dialog;
     }(BaseComponent);
 
-    MessageBox.propTypes = {
+    Dialog.propTypes = {
         /**
          * 标题
          * @attribute title
@@ -245,5 +239,5 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'uti
         style: PropTypes.object
     };
 
-    module.exports = MessageBox;
+    module.exports = Dialog;
 });

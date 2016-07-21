@@ -166,7 +166,6 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'Cor
                 className = classnames("cm-panel", className, getGrid(grid));
 
                 var headContent = this.renderHeader();
-
                 return React.createElement(
                     "div",
                     { className: className, style: style },

@@ -12,6 +12,7 @@ const Pagination = require('../../html/demo/pages/Pagination');
 const PageAccordion = require('../../html/demo/pages/Accordion');
 const PageSideBar = require('../../html/demo/pages/SideBar');
 const Tree = require('../../html/demo/pages/Tree/Tree');
+const ComboTree = require('../../html/demo/pages/Tree/ComboTree');
 const TreeCheckBox = require('../../html/demo/pages/Tree/TreeCheckBox');
 const TreeFunctions = require('../../html/demo/pages/Tree/TreeFunctions');
 const TreeRemote = require('../../html/demo/pages/Tree/TreeRemote');
@@ -27,8 +28,9 @@ const Progress = require('../../html/demo/pages/Progress');
 const DateRange = require('../../html/demo/pages/DateRange');
 const Tab = require('../../html/demo/pages/Tab');
 const Toast = require('../../html/demo/pages/Toast');
-const Panel = require('../../html/demo/pages/Panel');
-const MessageBox = require('../../html/demo/pages/MessageBox');
+const Panel = require('../../html/demo/pages/Panel/Panel');
+const MessageBox = require('../../html/demo/pages/Panel/MessageBox');
+const Dialog = require('../../html/demo/pages/Panel/Dialog');
 
 const ReactRouter = require('ReactRouter');
 const Router = ReactRouter.Router;
@@ -54,7 +56,8 @@ const APP = {
             {id:"81", text: "Tree",link: "Tree", component: Tree},
             {id:"82", text: "TreeCheckBox",link: "TreeCheckBox", component: TreeCheckBox},
             {id:"83", text: "TreeFunctions",link: "TreeFunctions", component: TreeFunctions},
-            {id:"84", text: "TreeRemote",link: "TreeRemote", component: TreeRemote}
+            {id:"84", text: "TreeRemote",link: "TreeRemote", component: TreeRemote},
+            {id:"85", text: "ComboTree",link: "ComboTree", component: ComboTree}
         ]},
         {id:"9", text: "Form",icon: "square-o", children: [
             {id:"91", text: "Input",link: "Input", component: Input},
@@ -72,7 +75,8 @@ const APP = {
         {id:"14", text: "Toast",icon: "fa fa-cog",link: "Toast", component: Toast},
         {id:"15", text: "Panel",icon: "fa fa-folder", children: [
             {id:"151", text: "Panel",icon: "fa fa-folder",link: "Panel", component: Panel},
-            {id:"152", text: "MessageBox",icon: "fa fa-folder",link: "MessageBox", component: MessageBox}
+            {id:"152", text: "MessageBox",icon: "fa fa-folder",link: "MessageBox", component: MessageBox},
+            {id:"153", text: "Dialog",icon: "fa fa-folder",link: "Dialog", component: Dialog}
         ]}
     ]
 };

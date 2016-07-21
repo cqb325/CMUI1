@@ -1,6 +1,6 @@
 /**
- * @author cqb 2016-06-23.
- * @module MessageBox
+ * @author cqb 2016-07-11.
+ * @module Dialog
  */
 
 const React = require("react");
@@ -14,31 +14,25 @@ const Panel = require('Panel');
 const Button = require('Button');
 
 /**
- * MessageBox 类
- * @class MessageBox
+ * Dialog 类
+ * @class Dialog
  * @constructor
  * @extend BaseComponent
  */
-class MessageBox extends BaseComponent {
+class Dialog extends BaseComponent {
     constructor(props) {
         super(props);
 
         this.addState({
             title: props.title || "",
-            msg: props.msg || "",
-            visibility: false,
-            type: props.type || "info"
+            visibility: false
         });
 
-        this.confirm = this.confirm.bind(this);
-        this.cancle = this.cancle.bind(this);
-
-        let components = [<Button theme="success" raised={true} icon="check" onClick={this.confirm}>确 定</Button>];
-        if(props.type === "confirm"){
-            components.push(<Button theme="info" raised={true} icon="close" className="ml-10" onClick={this.cancle}>取 消</Button>);
-        }
-        this.footers = {
-            components: components
+        this.footers = props.footers || {
+            components: [
+                <Button theme="success" raised={true} onClick={this.btnHandler.bind(this, true)} icon="save" >{props.okButtonText||"保 存"}</Button>,
+                <Button theme="info" raised={true} onClick={this.btnHandler.bind(this, false)} icon="flask" className="ml-10">{props.cancleButtonText||"取 消"}</Button>
+            ]
         };
 
         this.backdrop = null;
@@ -55,41 +49,44 @@ class MessageBox extends BaseComponent {
         return this.data;
     }
 
-    cancle(){
-        if(this.state.type === "confirm" && this.props.confirm){
-            this.props.confirm.apply(this, [false]);
-            this.hide();
-        }else{
-            this.hide();
-        }
+    setTitle(title){
+        this.setState({
+            title: title
+        });
     }
 
-    hide(){
+    /**
+     * 按钮点击处理函数
+     * @param flag
+     */
+    btnHandler(flag){
+        if(this.props.onConfirm){
+            let ret = this.props.onConfirm(flag);
+            if(ret){
+                this.close();
+            }
+
+            return ret;
+        }
+
+        this.close();
+        return true;
+    }
+
+    close(){
         this.setState({
             visibility: false
         });
 
-        if(this.props.onHide){
-            this.props.onHide();
+        if(this.props.onClose){
+            this.props.onClose();
         }
-        this.emit("hide");
+        this.emit("close");
         this.backdrop.style.display = "none";
     }
 
-    confirm(){
-        if(this.state.type === "confirm" && this.props.confirm){
-            if(this.props.confirm.apply(this, [true])){
-                this.hide();
-            }
-        }else{
-            this.hide();
-        }
-    }
-
-    show(msg, title){
+    open(){
         this.setState({
-            title: this.state.title || title,
-            msg: msg,
             visibility: true
         });
 
@@ -113,16 +110,16 @@ class MessageBox extends BaseComponent {
             ele.style.marginLeft = -w/2+"px";
             ele.style.marginTop = -h/2+"px";
 
-            if(this.props.onShow){
-                this.props.onShow();
+            if(this.props.onOpen){
+                this.props.onOpen();
             }
-            this.emit("show");
+            this.emit("open");
         }, 0);
     }
 
     render(){
         let {className, style} = this.props;
-        className = classnames("cm-messageBox", className, this.state.type);
+        className = classnames("cm-dialog", className);
         let props = Object.assign({}, this.props);
         props.className = className;
 
@@ -133,12 +130,12 @@ class MessageBox extends BaseComponent {
         props.footers = this.footers;
 
         return (
-            <Panel {...props} content={this.state.msg}></Panel>
+            <Panel {...props}>{this.props.children}</Panel>
         );
     }
 }
 
-MessageBox.propTypes = {
+Dialog.propTypes = {
     /**
      * 标题
      * @attribute title
@@ -171,4 +168,4 @@ MessageBox.propTypes = {
     style: PropTypes.object
 };
 
-module.exports = MessageBox;
+module.exports = Dialog;

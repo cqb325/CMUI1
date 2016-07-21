@@ -1024,6 +1024,18 @@ class Tree extends BaseComponent {
     }
 
     /**
+     * 接收到新的属性的时候更新节点
+     * @method componentWillReceiveProps
+     * @param nextProps
+     * @override
+     */
+    componentWillReceiveProps (nextProps) {
+        if(!shallowEqual(nextProps.data, this.props.data)){
+            this.setState({ data: nextProps.data });
+        }
+    }
+
+    /**
      * 动态加载JSON数据
      * @method loadDynamicJSON
      * @param {Object} parent 父节点
@@ -1035,8 +1047,13 @@ class Tree extends BaseComponent {
             parent = this.getItem(parent);
         }
         if(parent){
-            parent.children = parent.children ? parent.children.concat(json) : json;
-            parent._subNodes.updateState(parent.children);
+            if(parent.children){
+                parent.children = parent.children.concat(json);
+                parent._subNodes.updateState(parent.children);
+            }else{
+                parent.children = json;
+                parent._node.updateState(parent);
+            }
             cback ? cback(this) : false;
         }
     }
