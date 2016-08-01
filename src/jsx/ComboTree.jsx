@@ -47,12 +47,13 @@ class ComboTree extends BaseComponent {
      */
     _renderValues(){
         let item = this.selectedItems[this.state.value];
-        let label = item ? item["text"] : (this.props.placeholder ? this.props.placeholder+" " : " "),
+        let label = item ? item["text"] : (this.props.placeholder ? this.props.placeholder+"&nbsp;" : "&nbsp;"),
             className = classnames("cm-select-value", {
                 placeholder: !item && this.props.placeholder
             });
 
-        return(<span className={className}>{label}&nbsp;</span>);
+        let html = label+'<input type="hidden" name="'+this.props.name+'" value="'+this.state.value+'">';
+        return(<span className={className} dangerouslySetInnerHTML={{__html: html}}></span>);
     }
 
     /**

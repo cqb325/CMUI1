@@ -16,7 +16,7 @@ define(['module', 'utils/strings'], function (module, strings) {
                 if (value == undefined || value == null) {
                     return false;
                 }
-                return value.length > 0;
+                return (value + "").length > 0;
             },
 
             email: function email(value) {

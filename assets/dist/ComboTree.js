@@ -86,17 +86,13 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'Cor
             key: "_renderValues",
             value: function _renderValues() {
                 var item = this.selectedItems[this.state.value];
-                var label = item ? item["text"] : this.props.placeholder ? this.props.placeholder + " " : " ",
+                var label = item ? item["text"] : this.props.placeholder ? this.props.placeholder + "&nbsp;" : "&nbsp;",
                     className = classnames("cm-select-value", {
                     placeholder: !item && this.props.placeholder
                 });
 
-                return React.createElement(
-                    "span",
-                    { className: className },
-                    label,
-                    " "
-                );
+                var html = label + '<input type="hidden" name="' + this.props.name + '" value="' + this.state.value + '">';
+                return React.createElement("span", { className: className, dangerouslySetInnerHTML: { __html: html } });
             }
         }, {
             key: "_selectItem",

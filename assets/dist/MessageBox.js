@@ -143,8 +143,13 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'uti
         }, {
             key: "confirm",
             value: function confirm() {
-                if (this.state.type === "confirm" && this.props.confirm) {
-                    if (this.props.confirm.apply(this, [true])) {
+                if (this.props.confirm) {
+                    if (this.state.type === "confirm") {
+                        if (this.props.confirm.apply(this, [true])) {
+                            this.hide();
+                        }
+                    } else {
+                        this.props.confirm.apply(this, []);
                         this.hide();
                     }
                 } else {
