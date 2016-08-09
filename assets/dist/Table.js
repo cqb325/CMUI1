@@ -1,4 +1,4 @@
-define(["module", "react", "Core", "classnames", "core/BaseComponent", "moment"], function (module, React, Core, classnames, BaseComponent, moment) {
+define(["module", "react", "Core", "classnames", "core/BaseComponent", "moment", "utils/Dom"], function (module, React, Core, classnames, BaseComponent, moment, Dom) {
     "use strict";
 
     function _classCallCheck(instance, Constructor) {
@@ -127,16 +127,30 @@ define(["module", "react", "Core", "classnames", "core/BaseComponent", "moment"]
                             } else {
                                 var value = row[col.name];
                                 value = this._formatData(value, col, row);
+                                var tip = "";
                                 if (React.isValidElement(value)) {
+                                    if (col.tip) {
+                                        tip = value.props.children;
+                                    }
                                     return React.createElement(
                                         "td",
-                                        { key: "cell_" + rowIndex + "_" + colIndex },
+                                        { key: "cell_" + rowIndex + "_" + colIndex, title: tip },
                                         value
                                     );
                                 }
 
-                                var title = col.tip ? value : null;
-                                return React.createElement("td", { key: "cell_" + rowIndex + "_" + colIndex, title: title,
+                                if (value instanceof Array) {
+                                    value = value.join("");
+                                    col.tip = false;
+                                }
+
+                                if (col.tip) {
+                                    tip = value;
+                                    if ('<' == tip.charAt(0)) {
+                                        tip = Dom.dom(tip).text();
+                                    }
+                                }
+                                return React.createElement("td", { key: "cell_" + rowIndex + "_" + colIndex, title: tip,
                                     dangerouslySetInnerHTML: { __html: value } });
                             }
                         }, this);

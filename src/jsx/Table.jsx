@@ -8,6 +8,7 @@ const PropTypes = React.PropTypes;
 const classnames = require("classnames");
 const BaseComponent = require("core/BaseComponent");
 const moment = require("moment");
+const Dom = require("utils/Dom");
 
 /**
  * Table 类
@@ -88,17 +89,31 @@ class Table extends BaseComponent {
                     }else {
                         let value = row[col.name];
                         value = this._formatData(value, col, row);
+                        let tip = "";
                         if (React.isValidElement(value)) {
+                            if(col.tip){
+                                tip = value.props.children;
+                            }
                             return (
-                                <td key={"cell_"+rowIndex+"_"+colIndex}>
+                                <td key={"cell_"+rowIndex+"_"+colIndex} title={tip}>
                                     {value}
                                 </td>
                             );
                         }
 
-                        let title = col.tip ? value : null;
+                        if(value instanceof Array){
+                            value = value.join("");
+                            col.tip = false;
+                        }
+
+                        if(col.tip){
+                            tip = value;
+                            if('<' == tip.charAt(0)){
+                                tip = Dom.dom(tip).text();
+                            }
+                        }
                         return (
-                            <td key={"cell_"+rowIndex+"_"+colIndex} title={title}
+                            <td key={"cell_"+rowIndex+"_"+colIndex} title={tip}
                                 dangerouslySetInnerHTML={{__html: value}}></td>
                         );
                     }

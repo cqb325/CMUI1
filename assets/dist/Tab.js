@@ -153,7 +153,7 @@ define(["module", "react", 'react-dom', "classnames", 'Core', "core/BaseComponen
                     });
 
                     var component = item.component;
-                    var tabPanel = React.createElement(component, { ref: item.id });
+                    var tabPanel = React.createElement(component, { ref: item.id, data: item.data });
                     return React.createElement(
                         "div",
                         { key: index, className: className },

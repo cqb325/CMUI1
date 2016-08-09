@@ -112,7 +112,7 @@ class Tab extends BaseComponent {
             });
 
             let component = item.component;
-            let tabPanel = React.createElement(component, {ref: item.id});
+            let tabPanel = React.createElement(component, {ref: item.id, data: item.data});
             return (
                 <div key={index} className={className}>
                     {tabPanel}

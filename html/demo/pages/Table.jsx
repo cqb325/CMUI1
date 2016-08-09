@@ -24,6 +24,11 @@ class TablePage extends Component{
             }
         };
 
+        let linkFormat = function(value, column, row){
+            //return ('<a href="###">'+value+'</a>');
+            return (<a href="###">{value}</a>);
+        };
+
         let scoreFormat = function(value, column, row){
             if (value <= 100 && value >= 90){
                 return "A";
@@ -43,7 +48,7 @@ class TablePage extends Component{
         };
 
         let header = [
-            {name: "name", text: "姓名"},
+            {name: "name", text: "姓名", format: linkFormat, tip: true},
             {name: "sex", text: "性别", format: sexFormat},
             {name: "score", text: "分数", format: scoreFormat},
             {name: "time", text: "时间", format: "DateFormat"}

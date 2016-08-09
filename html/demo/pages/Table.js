@@ -81,6 +81,15 @@ define(['module', 'react', 'react-dom', 'classnames', 'Table', "./Tile"], functi
                     }
                 };
 
+                var linkFormat = function linkFormat(value, column, row) {
+                    //return ('<a href="###">'+value+'</a>');
+                    return React.createElement(
+                        'a',
+                        { href: '###' },
+                        value
+                    );
+                };
+
                 var scoreFormat = function scoreFormat(value, column, row) {
                     if (value <= 100 && value >= 90) {
                         return "A";
@@ -99,7 +108,7 @@ define(['module', 'react', 'react-dom', 'classnames', 'Table', "./Tile"], functi
                     }
                 };
 
-                var header = [{ name: "name", text: "姓名" }, { name: "sex", text: "性别", format: sexFormat }, { name: "score", text: "分数", format: scoreFormat }, { name: "time", text: "时间", format: "DateFormat" }];
+                var header = [{ name: "name", text: "姓名", format: linkFormat, tip: true }, { name: "sex", text: "性别", format: sexFormat }, { name: "score", text: "分数", format: scoreFormat }, { name: "time", text: "时间", format: "DateFormat" }];
                 var data = [];
 
                 var date = new Date();
