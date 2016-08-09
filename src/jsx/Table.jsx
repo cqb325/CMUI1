@@ -107,7 +107,7 @@ class Table extends BaseComponent {
                         }
 
                         if(col.tip){
-                            tip = value;
+                            tip = value+"";
                             if('<' == tip.charAt(0)){
                                 tip = Dom.dom(tip).text();
                             }

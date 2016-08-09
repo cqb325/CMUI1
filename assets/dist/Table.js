@@ -145,7 +145,7 @@ define(["module", "react", "Core", "classnames", "core/BaseComponent", "moment",
                                 }
 
                                 if (col.tip) {
-                                    tip = value;
+                                    tip = value + "";
                                     if ('<' == tip.charAt(0)) {
                                         tip = Dom.dom(tip).text();
                                     }
