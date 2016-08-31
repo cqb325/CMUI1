@@ -272,7 +272,11 @@ define(["module", "react", "Core", "classnames", "core/BaseComponent", "moment",
          * @constructor
          */
         DateFormat: function DateFormat(value, column, row) {
-            return moment(value).format("YYYY-MM-DD");
+            if (value) {
+                return moment(value).format("YYYY-MM-DD");
+            } else {
+                return "";
+            }
         },
 
         /**
@@ -284,7 +288,11 @@ define(["module", "react", "Core", "classnames", "core/BaseComponent", "moment",
          * @constructor
          */
         DateTimeFormat: function DateTimeFormat(value, column, row) {
-            return moment(value).format("YYYY-MM-DD HH:mm:ss");
+            if (value) {
+                return moment(value).format("YYYY-MM-DD HH:mm:ss");
+            } else {
+                return "";
+            }
         }
     };
 
