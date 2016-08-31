@@ -347,6 +347,24 @@ class FormControl extends BaseComponent {
         this.setState({errorTip: msg});
     }
 
+    /**
+     * 动态设置验证规则
+     * @param rule
+     * @param rule_args
+     */
+    setRule(rule, rule_args){
+        this.rules[rule] = rule_args;
+    }
+
+    /**
+     * 动态设置验证提示消息
+     * @param rule
+     * @param message
+     */
+    setMessage(rule, message){
+        this.messages[rule] = message;
+    }
+
     render(){
         let {
             label,

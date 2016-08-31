@@ -372,6 +372,16 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                 this.setState({ errorTip: msg });
             }
         }, {
+            key: "setRule",
+            value: function setRule(rule, rule_args) {
+                this.rules[rule] = rule_args;
+            }
+        }, {
+            key: "setMessage",
+            value: function setMessage(rule, message) {
+                this.messages[rule] = message;
+            }
+        }, {
             key: "render",
             value: function render() {
                 var _props2 = this.props;
