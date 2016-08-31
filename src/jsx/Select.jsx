@@ -136,6 +136,7 @@ class Select extends BaseComponent {
             if (!this.props.multi) {
                 this.hideOptions();
             }
+            this.selectedItems = {};
         }else {
             if (this.props.multi) {
                 this.selectedItems[item[valueField]] = item;

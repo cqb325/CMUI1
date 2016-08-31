@@ -166,6 +166,7 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'Cor
                     if (!this.props.multi) {
                         this.hideOptions();
                     }
+                    this.selectedItems = {};
                 } else {
                     if (this.props.multi) {
                         this.selectedItems[item[valueField]] = item;
