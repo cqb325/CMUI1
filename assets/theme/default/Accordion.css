@@ -155,7 +155,7 @@
 }
 .cm-accordion.white ul li a {
   background: #fff;
-  color: #555555;
+  color: #555;
 }
 .cm-accordion.white > ul > li.active > a,
 .cm-accordion.white > ul > li:hover > a {
