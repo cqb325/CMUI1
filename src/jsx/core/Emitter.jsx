@@ -101,6 +101,10 @@ class Emitter{
         return this._addListener.apply(this, args);
     }
 
+    un(...args) {
+        return this._removeListener.apply(this, args);
+    }
+
     /**
      * 事件监听
      * @method _addListener

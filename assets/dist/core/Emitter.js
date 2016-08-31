@@ -132,6 +132,15 @@ define(['module', 'react', 'Core'], function (module, React, Core) {
                 return this._addListener.apply(this, args);
             }
         }, {
+            key: 'un',
+            value: function un() {
+                for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                    args[_key2] = arguments[_key2];
+                }
+
+                return this._removeListener.apply(this, args);
+            }
+        }, {
             key: '_addListener',
             value: function _addListener(type, listener) {
                 var m;
@@ -292,8 +301,8 @@ define(['module', 'react', 'Core'], function (module, React, Core) {
      * @private
      */
     function _extend(target) {
-        for (var _len2 = arguments.length, objs = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-            objs[_key2 - 1] = arguments[_key2];
+        for (var _len3 = arguments.length, objs = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+            objs[_key3 - 1] = arguments[_key3];
         }
 
         for (var i = 0, l = objs.length; i < l; i++) {
