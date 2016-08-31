@@ -107,6 +107,7 @@ define(["module", "react", "classnames", "core/BaseComponent", 'FontIcon', 'inte
                 if (this.props.onClick) {
                     this.props.onClick();
                 }
+                this.emit("click");
                 if (this.props.once) {
                     this.disable();
                 }
