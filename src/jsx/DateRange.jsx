@@ -12,6 +12,7 @@ const clickAway = require("utils/ClickAway");
 const BaseComponent = require("core/BaseComponent");
 const PropTypes = React.PropTypes;
 const Date = require("Date");
+const Button = require("./Button");
 const FormControl = require('FormControl');
 
 /**
@@ -395,6 +396,28 @@ class DateRange extends BaseComponent {
         }
     }
 
+    clear(){
+        this._selectedDate = [];
+        this.updateRange();
+
+        this.setState({
+            start: null,
+            end: null
+        });
+
+        this.hide();
+    }
+
+    renderTools(){
+        let {clear} = this.props;
+        if(clear) {
+            return <span className="pull-right"><Button theme="info" flat="true"
+                                                        onClick={this.clear.bind(this)}>清除</Button></span>
+        }else{
+            return null;
+        }
+    }
+
     renderShortCuts(){
         let {shortcuts} = this.props;
         if(shortcuts){
@@ -472,6 +495,7 @@ class DateRange extends BaseComponent {
                 <div className="tools-info">
                     <span>选择了: {days}天</span>
                     {this.renderShortCuts()}
+                    {this.renderTools()}
                 </div>
                 <Date ref="startDate" {...startProps} onSelectDate={this._selectStartDate.bind(this)}></Date>
                 <Date ref="endDate" {...endProps} onSelectDate={this._selectEndDate.bind(this)}></Date>

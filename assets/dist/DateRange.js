@@ -1,4 +1,4 @@
-define(["module", "react", "react-dom", "classnames", "moment", "utils/Dom", "utils/ClickAway", "core/BaseComponent", "Date", 'FormControl'], function (module, React, ReactDOM, classnames, moment, Dom, clickAway, BaseComponent, Date, FormControl) {
+define(["module", "react", "react-dom", "classnames", "moment", "utils/Dom", "utils/ClickAway", "core/BaseComponent", "Date", "./Button", 'FormControl'], function (module, React, ReactDOM, classnames, moment, Dom, clickAway, BaseComponent, Date, Button, FormControl) {
     "use strict";
 
     var _extends = Object.assign || function (target) {
@@ -460,6 +460,39 @@ define(["module", "react", "react-dom", "classnames", "moment", "utils/Dom", "ut
                 }
             }
         }, {
+            key: "clear",
+            value: function clear() {
+                this._selectedDate = [];
+                this.updateRange();
+
+                this.setState({
+                    start: null,
+                    end: null
+                });
+
+                this.hide();
+            }
+        }, {
+            key: "renderTools",
+            value: function renderTools() {
+                var clear = this.props.clear;
+
+                if (clear) {
+                    return React.createElement(
+                        "span",
+                        { className: "pull-right" },
+                        React.createElement(
+                            Button,
+                            { theme: "info", flat: "true",
+                                onClick: this.clear.bind(this) },
+                            "清除"
+                        )
+                    );
+                } else {
+                    return null;
+                }
+            }
+        }, {
             key: "renderShortCuts",
             value: function renderShortCuts() {
                 var shortcuts = this.props.shortcuts;
@@ -557,7 +590,8 @@ define(["module", "react", "react-dom", "classnames", "moment", "utils/Dom", "ut
                                 days,
                                 "天"
                             ),
-                            this.renderShortCuts()
+                            this.renderShortCuts(),
+                            this.renderTools()
                         ),
                         React.createElement(Date, _extends({ ref: "startDate" }, startProps, { onSelectDate: this._selectStartDate.bind(this) })),
                         React.createElement(Date, _extends({ ref: "endDate" }, endProps, { onSelectDate: this._selectEndDate.bind(this) }))
