@@ -258,12 +258,12 @@ define(["module", "react", "react-dom", "classnames", "moment", "utils/Dom", "ut
                 text = text ? React.createElement(
                     "span",
                     { className: "date-text" },
-                    React.createElement("input", { type: "hidden", name: name, value: this.state.value }),
+                    React.createElement("input", { type: "hidden", name: name, defaultValue: this.state.value }),
                     text
                 ) : React.createElement(
                     "span",
                     { className: "date-text" },
-                    React.createElement("input", { type: "hidden", name: name, value: this.state.value }),
+                    React.createElement("input", { type: "hidden", name: name, defaultValue: this.state.value }),
                     placeholder,
                     " "
                 );

@@ -1,4 +1,4 @@
-define(['module', 'react', '../BaseDemo', 'MessageBox', "../Tile", "Button", "FontIcon", "IconButton"], function (module, React, BaseDemo, MessageBox, Tile, Button, FontIcon, IconButton) {
+define(['module', 'react', './BaseDemo', 'classnames', 'Divider', 'utils/animation', "./Tile"], function (module, React, BaseDemo, classnames, Divider, Animation, Tile) {
     'use strict';
 
     function _classCallCheck(instance, Constructor) {
@@ -49,73 +49,63 @@ define(['module', 'react', '../BaseDemo', 'MessageBox', "../Tile", "Button", "Fo
         if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
     }
 
-    var MessageBoxPage = function (_BaseDemo) {
-        _inherits(MessageBoxPage, _BaseDemo);
+    var Page = function (_BaseDemo) {
+        _inherits(Page, _BaseDemo);
 
-        function MessageBoxPage() {
-            _classCallCheck(this, MessageBoxPage);
+        function Page() {
+            _classCallCheck(this, Page);
 
-            return _possibleConstructorReturn(this, Object.getPrototypeOf(MessageBoxPage).apply(this, arguments));
+            return _possibleConstructorReturn(this, Object.getPrototypeOf(Page).apply(this, arguments));
         }
 
-        _createClass(MessageBoxPage, [{
-            key: 'showTip',
-            value: function showTip() {
-                this.refs.tip.show("显示内容", "提示");
-            }
-        }, {
-            key: 'showConfirm',
-            value: function showConfirm() {
-                this.refs.confirm.show("显示内容", "提示");
-            }
-        }, {
-            key: 'confirm',
-            value: function confirm(flag) {
-                console.log(flag);
-            }
-        }, {
+        _createClass(Page, [{
             key: 'render',
             value: function render() {
-
                 return React.createElement(
                     'div',
                     { className: 'container' },
-                    React.createElement(MessageBox, { title: '提示', ref: 'tip' }),
-                    React.createElement(MessageBox, { title: '提示', ref: 'confirm', type: 'confirm', confirm: this.confirm }),
                     React.createElement(
                         Tile,
                         { header: "使用方式" },
                         React.createElement(
                             'pre',
                             { className: 'brush: js', ref: 'code' },
-                            '\n\n'
+                            '<Divider\n    theme={String}          //default、dotted、dashed\n    className={String}      //自定义class\n    style={Object}          //样式\n></Divider>\n'
                         )
                     ),
                     React.createElement(
                         Tile,
-                        { header: "基本使用方式" },
+                        { header: "样式" },
+                        React.createElement(Divider, null),
                         React.createElement(
-                            Button,
-                            { onClick: this.showTip.bind(this) },
-                            '显示提示框'
-                        ),
-                        React.createElement(
-                            Button,
-                            { onClick: this.showConfirm.bind(this) },
-                            '显示提示框'
+                            Animation,
+                            { from: { width: "50px", height: "50px", opacity: "1" }, to: { width: "200px", height: "200px", opacity: "0.2" }, time: '300' },
+                            React.createElement('div', { style: { background: "#ff0000", width: "50px", height: "50px" } })
                         ),
                         React.createElement(
                             'pre',
                             { className: 'brush: js', ref: 'code1' },
-                            '\n\n'
+                            '<Divider />'
+                        ),
+                        React.createElement(Divider, { theme: 'dotted' }),
+                        React.createElement(
+                            'pre',
+                            { className: 'brush: js', ref: 'code2' },
+                            '<Divider theme="dotted"/>'
+                        ),
+                        React.createElement(Divider, { theme: 'dashed' }),
+                        React.createElement(
+                            'pre',
+                            { className: 'brush: js', ref: 'code3' },
+                            '<Divider theme="dashed"/>'
                         )
                     )
                 );
             }
         }]);
 
-        return MessageBoxPage;
+        return Page;
     }(BaseDemo);
 
-    module.exports = MessageBoxPage;
+    module.exports = Page;
 });

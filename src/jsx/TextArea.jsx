@@ -22,11 +22,6 @@ const PropTypes = React.PropTypes;
  */
 class TextArea extends BaseComponent {
 
-    defaultProps = {
-        trigger: 'blur',
-        value: ''
-    };
-
     constructor(props) {
         super(props);
 
@@ -101,7 +96,7 @@ class TextArea extends BaseComponent {
 
     render () {
         let { className, grid, type, trigger, style, height} = this.props;
-        const others = Omit(this.props, ["className", "grid", "type", "trigger", "style"]);
+        const others = Omit(this.props, ["className", "grid", "type", "trigger", "style","autoHeight"]);
         let handleChange = this.props.handleChange ? (event)=>{this.props.handleChange(event, {component: this})} : this.handleChange.bind(this);
         style = style || {};
         style["height"] = height;
@@ -164,6 +159,11 @@ TextArea.propTypes = {
      * @type {String}
      */
     height: PropTypes.string
+};
+
+TextArea.defaultProps = {
+    trigger: 'blur',
+    value: ''
 };
 
 module.exports = TextArea;

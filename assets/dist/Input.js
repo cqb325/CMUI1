@@ -73,12 +73,6 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
 
             var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Input).call(this, props));
 
-            _this.defaultProps = {
-                trigger: 'blur',
-                value: ''
-            };
-
-
             _this.addState({
                 value: props.value
             });
@@ -149,13 +143,13 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                 var trigger = _props2.trigger;
 
                 var others = Omit(this.props, ["className", "grid", "type", "trigger"]);
-                var handleChange = this.props.handleChange ? function (event) {
-                    _this2.props.handleChange(event, { component: _this2 });
+                var handleChange = this.props["data-handleChange"] ? function (event) {
+                    _this2.props["data-handleChange"](event, { component: _this2 });
                 } : this.handleChange.bind(this);
                 var props = {
                     className: classnames(className, 'cm-form-control', getGrid(grid)),
                     onChange: handleChange,
-                    type: type === 'password' ? 'password' : 'text',
+                    type: type === ('password' || 'hidden') ? type : 'text',
                     value: this.state.value
                 };
 
@@ -170,6 +164,11 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
 
         return Input;
     }(BaseComponent);
+
+    Input.defaultProps = {
+        trigger: 'blur',
+        value: ''
+    };
 
     FormControl.register(Input, ["text"]);
 

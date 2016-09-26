@@ -6,7 +6,7 @@
 
 module.exports = {
     /**
-     * 设置样式前缀
+     * 璁剧疆鏍峰紡鍓嶇紑
      * @method set
      */
     set(style, key, value) {

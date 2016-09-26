@@ -109,6 +109,16 @@ class Panel extends BaseComponent {
         }
     }
 
+    renderContent(){
+        if(this.state.content.substring(0,1) === "<"){
+            return (
+                <div dangerouslySetInnerHTML={{__html: this.state.content}}></div>
+            );
+        }else{
+            return this.state.content;
+        }
+    }
+
     render(){
         let {className, style, grid} = this.props;
 
@@ -122,7 +132,7 @@ class Panel extends BaseComponent {
                 </div>
                 <div className="cm-panel-content">
                     {this.props.children}
-                    {this.state.content}
+                    {this.renderContent()}
                 </div>
                 {this.renderFooter()}
             </div>

@@ -79,13 +79,13 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
             key: "render",
             value: function render() {
                 var item = this.props.data,
-                    icon = item.icon ? React.createElement(FontIcon, { icon: item.icon, className: "menu-icon" }) : null,
+                    icon = item.customIcon ? React.createElement("i", { className: "menu-icon " + item.customIcon }) : item.icon ? React.createElement(FontIcon, { icon: item.icon, className: "menu-icon" }) : null,
                     link = item.link ? item.link : null,
                     text = item.text,
                     children = item.children;
 
                 var visible = item._visible;
-                var subMenu = children ? React.createElement(SubMenus, { visible: visible, onSelect: this.props.onSelect, items: children, isSub: true }) : "";
+                var subMenu = children ? React.createElement(SubMenus, { hasExpand: this.props.hasExpand, visible: visible, onSelect: this.props.onSelect, items: children, isSub: true }) : "";
 
                 var className = classnames({
                     active: item._active
@@ -136,12 +136,13 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
             value: function render() {
                 var menus = [];
                 var subs = this.props.items;
+                var hasExpand = this.props.hasExpand;
 
                 if (subs) {
                     for (var i = 0; i < subs.length; i++) {
                         var item = subs[i];
                         var identity = item["identity"] || item["text"];
-                        menus.push(React.createElement(MenuItem, { onSelect: this.props.onSelect, key: i, identity: identity, data: item }));
+                        menus.push(React.createElement(MenuItem, { hasExpand: hasExpand, onSelect: this.props.onSelect, key: i, identity: identity, data: item }));
                     }
                 }
 
@@ -149,7 +150,7 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
                     submenu: this.props.isSub
                 });
 
-                var visible = this.props.visible ? 'block' : "none";
+                var visible = hasExpand == false ? "block" : this.props.visible ? 'block' : "none";
                 if (this.props.isSub) {
                     return React.createElement(
                         "ul",
@@ -236,6 +237,15 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
                 this._onSelect(item);
             }
         }, {
+            key: "setActiveStatus",
+            value: function setActiveStatus(item) {
+                if (typeof item === "string") {
+                    item = this.getItem(id);
+                }
+
+                this._onSelect(item, true);
+            }
+        }, {
             key: "clearActive",
             value: function clearActive() {
                 var prefix = this.props.prefix + "_" || "";
@@ -249,7 +259,7 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
             }
         }, {
             key: "_onSelect",
-            value: function _onSelect(item) {
+            value: function _onSelect(item, onlyStatus) {
                 var prefix = this.props.prefix + "_" || "";
                 Store.set(prefix + "sideBar_active", item.id);
                 if (this.state._active && shallowEqual(this.state._active, item)) {
@@ -286,7 +296,7 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
                     this.setState({ _active: item });
                 }
 
-                if (this.props.onSelect) {
+                if (this.props.onSelect && !onlyStatus) {
                     this.props.onSelect(item);
                 }
             }
@@ -314,7 +324,7 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
                                     this.props.header
                                 )
                             ),
-                            React.createElement(SubMenus, { onSelect: this._onSelect.bind(this), items: this.state.data, isSub: false })
+                            React.createElement(SubMenus, { hasExpand: this.props.hasExpand, onSelect: this._onSelect.bind(this), items: this.state.data, isSub: false })
                         )
                     ),
                     React.createElement(

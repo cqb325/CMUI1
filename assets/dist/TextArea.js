@@ -82,12 +82,6 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
 
             var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TextArea).call(this, props));
 
-            _this.defaultProps = {
-                trigger: 'blur',
-                value: ''
-            };
-
-
             _this.addState({
                 value: props.value
             });
@@ -182,7 +176,7 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                 var style = _props2.style;
                 var height = _props2.height;
 
-                var others = Omit(this.props, ["className", "grid", "type", "trigger", "style"]);
+                var others = Omit(this.props, ["className", "grid", "type", "trigger", "style", "autoHeight"]);
                 var handleChange = this.props.handleChange ? function (event) {
                     _this2.props.handleChange(event, { component: _this2 });
                 } : this.handleChange.bind(this);
@@ -245,6 +239,11 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
          * @type {String}
          */
         height: PropTypes.string
+    };
+
+    TextArea.defaultProps = {
+        trigger: 'blur',
+        value: ''
     };
 
     module.exports = TextArea;

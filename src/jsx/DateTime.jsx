@@ -181,8 +181,8 @@ class Datetime extends BaseComponent {
 
         let text = this.state.value ? this.state.value : "";
         text = text ?
-            (<span className="date-text"><input type="hidden" name={name} value={this.state.value}/>{text}</span>) :
-            (<span className="date-text"><input type="hidden" name={name} value={this.state.value}/>{placeholder}&nbsp;</span>);
+            (<span className="date-text"><input type="hidden" name={name} defaultValue={this.state.value}/>{text}</span>) :
+            (<span className="date-text"><input type="hidden" name={name} defaultValue={this.state.value}/>{placeholder}&nbsp;</span>);
 
         return (<div ref="datetime" onClick={this.show.bind(this)} className={className} style={style||{}}>
             {text}

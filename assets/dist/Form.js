@@ -136,7 +136,7 @@ define(["module", "react", "react-dom", "classnames", "core/BaseComponent", 'uti
                     var componentName = child.type.name || child.type.toString().match(/function\s*([^(]*)\(/)[1];
                     if (componentName === 'FormControl') {
                         var props = _extends({
-                            itemBind: _this2.itemBind.bind(_this2)
+                            "data-itemBind": _this2.itemBind.bind(_this2)
                         }, child.props);
                         props.layout = _this2.props.layout ? _this2.props.layout : props.layout;
                         return React.cloneElement(child, props);

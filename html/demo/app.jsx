@@ -31,6 +31,7 @@ const Toast = require('../../html/demo/pages/Toast');
 const Panel = require('../../html/demo/pages/Panel/Panel');
 const MessageBox = require('../../html/demo/pages/Panel/MessageBox');
 const Dialog = require('../../html/demo/pages/Panel/Dialog');
+const Divider = require('../../html/demo/pages/Divider');
 
 const ReactRouter = require('ReactRouter');
 const Router = ReactRouter.Router;
@@ -77,7 +78,8 @@ const APP = {
             {id:"151", text: "Panel",icon: "fa fa-folder",link: "Panel", component: Panel},
             {id:"152", text: "MessageBox",icon: "fa fa-folder",link: "MessageBox", component: MessageBox},
             {id:"153", text: "Dialog",icon: "fa fa-folder",link: "Dialog", component: Dialog}
-        ]}
+        ]},
+        {id:"16", text: "Divider",icon: "fa fa-cog",link: "Divider", component: Divider}
     ]
 };
 

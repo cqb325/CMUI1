@@ -87,7 +87,7 @@ class Form extends BaseComponent {
             let componentName = child.type.name || child.type.toString().match(/function\s*([^(]*)\(/)[1];
             if(componentName === 'FormControl'){
                 let props = Object.assign({
-                    itemBind: this.itemBind.bind(this)
+                    "data-itemBind": this.itemBind.bind(this)
                 },child.props);
                 props.layout = this.props.layout ? this.props.layout : props.layout;
                 return React.cloneElement(child, props);

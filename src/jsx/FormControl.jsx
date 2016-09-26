@@ -65,14 +65,14 @@ class FormControl extends BaseComponent {
                 key: this.props.name,
                 id: this.props.id,
                 ref: "formItem",
-                valueType: component.valueType
+                "data-valueType": component.valueType
             }, others);
             let componentName = component.component.name || component.component.toString().match(/function\s*([^(]*)\(/)[1];
             if(componentName === 'Input'){
-                props.handleChange = this.handleChange.bind(this);
+                props["data-handleChange"] = this.handleChange.bind(this);
             }else if(componentName === 'TextArea'){
                 this._areaLabel = true;
-                props.handleChange = this.handleChange.bind(this);
+                props["data-handleChange"] = this.handleChange.bind(this);
             }else{
                 props.onChange = this.onChange.bind(this);
             }
@@ -97,7 +97,7 @@ class FormControl extends BaseComponent {
                 let others = Omit(this.props, ["className","children","layout","rules","messages","isFormItem","onValid","onChange","label","labelGrid"]);
                 let props = Object.assign({
                     key: index,
-                    valueType: registerComp.valueType,
+                    "data-valueType": registerComp.valueType,
                     ref: "formItem"
                 }, others);
 
@@ -106,7 +106,7 @@ class FormControl extends BaseComponent {
                 let componentName = child.type.name || child.type.toString().match(/function\s*([^(]*)\(/)[1];
 
                 if(componentName === 'Input' || componentName === 'TextArea'){
-                    props.handleChange = this.handleChange.bind(this);
+                    props["data-handleChange"] = this.handleChange.bind(this);
                     if(componentName === 'TextArea'){
                         this._areaLabel = true;
                     }
@@ -284,8 +284,8 @@ class FormControl extends BaseComponent {
 
     componentDidMount(){
         this.item = this.refs["formItem"];
-        if(this.props.itemBind && this.isFormItem()){
-            this.props.itemBind({
+        if(this.props["data-itemBind"] && this.isFormItem()){
+            this.props["data-itemBind"]({
                 ref: this,
                 name: this.props.name,
                 isFormItem: this.isFormItem()

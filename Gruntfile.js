@@ -100,8 +100,10 @@ module.exports = function(grunt) {
                 files: ['src/**/*.jsx','html/**/*.jsx'],
                 tasks: ["babel"]
             },
-            files: ['<%= jshint.files %>','src/theme/**/*.less'],
-            tasks: ["less",'cssmin',"uglify"]
+            less: {
+                files: ['src/theme/**/*.less'],
+                tasks: ["less","cssmin"]
+            }
         }
     });
 
@@ -111,7 +113,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-react');
     grunt.loadNpmTasks('grunt-babel');
 
     // 只需在命令行上输入"grunt"，就会执行default task

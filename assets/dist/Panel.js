@@ -155,6 +155,15 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'Cor
                 }
             }
         }, {
+            key: "renderContent",
+            value: function renderContent() {
+                if (this.state.content.substring(0, 1) === "<") {
+                    return React.createElement("div", { dangerouslySetInnerHTML: { __html: this.state.content } });
+                } else {
+                    return this.state.content;
+                }
+            }
+        }, {
             key: "render",
             value: function render() {
                 var _props = this.props;
@@ -178,7 +187,7 @@ define(["module", "react", 'react-dom', "classnames", "core/BaseComponent", 'Cor
                         "div",
                         { className: "cm-panel-content" },
                         this.props.children,
-                        this.state.content
+                        this.renderContent()
                     ),
                     this.renderFooter()
                 );

@@ -31,13 +31,13 @@ class MenuItem extends Component {
 
     render() {
         let item = this.props.data,
-            icon = item.icon ? (<FontIcon icon={item.icon} className={"menu-icon"}></FontIcon>) : null,
+            icon = item.customIcon ? <i className={"menu-icon "+item.customIcon}></i> : item.icon ? (<FontIcon icon={item.icon} className={"menu-icon"}></FontIcon>) : null,
             link = item.link ? item.link : null,
             text = item.text,
             children = item.children;
 
         let visible = item._visible;
-        let subMenu = children ? (<SubMenus visible={visible} onSelect={this.props.onSelect} items={children} isSub={true}></SubMenus>) : "";
+        let subMenu = children ? (<SubMenus hasExpand={this.props.hasExpand} visible={visible} onSelect={this.props.onSelect} items={children} isSub={true}></SubMenus>) : "";
 
         let className = classnames({
             active: item._active
@@ -74,12 +74,13 @@ class SubMenus extends Component{
     render() {
         let menus = [];
         let subs = this.props.items;
+        let hasExpand = this.props.hasExpand;
 
         if(subs) {
             for (let i = 0; i < subs.length; i++) {
                 let item = subs[i];
                 let identity = item["identity"] || item["text"];
-                menus.push(<MenuItem onSelect={this.props.onSelect} key={i} identity={identity} data={item}/>);
+                menus.push(<MenuItem hasExpand={hasExpand} onSelect={this.props.onSelect} key={i} identity={identity} data={item}/>);
             }
         }
 
@@ -87,7 +88,7 @@ class SubMenus extends Component{
             submenu: this.props.isSub
         });
 
-        let visible = this.props.visible ? 'block' : "none";
+        let visible = hasExpand == false ? "block" : (this.props.visible ? 'block' : "none");
         if(this.props.isSub){
             return (
                 <ul className={className} style={{display: visible}}>
@@ -168,6 +169,19 @@ class SideBar extends BaseComponent {
         this._onSelect(item);
     }
 
+    /**
+     * 设置激活状态
+     * @method setActiveStatus
+     * @param item {Object} 要激活的item
+     */
+    setActiveStatus(item){
+        if(typeof item === "string"){
+            item = this.getItem(id);
+        }
+
+        this._onSelect(item, true);
+    }
+
     clearActive(){
         let prefix = this.props.prefix + "_" || "";
         Store.set(prefix+"sideBar_active", "");
@@ -187,9 +201,10 @@ class SideBar extends BaseComponent {
      * 选中节点
      * @method _onSelect
      * @param item
+     * @param onlyStatus
      * @private
      */
-    _onSelect(item){
+    _onSelect(item, onlyStatus){
         let prefix = this.props.prefix + "_" || "";
         Store.set(prefix+"sideBar_active", item.id);
         if(this.state._active && shallowEqual(this.state._active, item)){
@@ -226,7 +241,7 @@ class SideBar extends BaseComponent {
             this.setState({_active: item});
         }
 
-        if(this.props.onSelect){
+        if(this.props.onSelect && !onlyStatus){
             this.props.onSelect(item);
         }
     }
@@ -241,7 +256,7 @@ class SideBar extends BaseComponent {
                         <div className="sidebar-header">
                             <img className="pull-left" src={this.props.logo}/><span>{this.props.header}</span>
                         </div>
-                        <SubMenus onSelect={this._onSelect.bind(this)} items={this.state.data} isSub={false}></SubMenus>
+                        <SubMenus hasExpand={this.props.hasExpand} onSelect={this._onSelect.bind(this)} items={this.state.data} isSub={false}></SubMenus>
                     </div>
                 </div>
                 <div className="desktop-wrap client">

@@ -20,11 +20,6 @@ const FormControl = require('FormControl');
  */
 class Input extends BaseComponent {
 
-    defaultProps = {
-        trigger: 'blur',
-        value: ''
-    };
-
     constructor(props) {
         super(props);
 
@@ -79,7 +74,7 @@ class Input extends BaseComponent {
     render () {
         const { className, grid, type, trigger} = this.props;
         const others = Omit(this.props, ["className", "grid", "type", "trigger"]);
-        let handleChange = this.props.handleChange ? (event)=>{this.props.handleChange(event, {component: this})} : this.handleChange.bind(this);
+        let handleChange = this.props["data-handleChange"] ? (event)=>{this.props["data-handleChange"](event, {component: this})} : this.handleChange.bind(this);
         const props = {
             className: classnames(
                 className,
@@ -87,7 +82,7 @@ class Input extends BaseComponent {
                 getGrid(grid)
             ),
             onChange: handleChange,
-            type: type === 'password' ? 'password' : 'text',
+            type: type === ('password' || 'hidden') ? type : 'text',
             value: this.state.value
         };
 
@@ -100,6 +95,10 @@ class Input extends BaseComponent {
     }
 }
 
+Input.defaultProps = {
+    trigger: 'blur',
+    value: ''
+};
 
 FormControl.register(Input, ["text"]); 
 

@@ -128,14 +128,14 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                         key: this.props.name,
                         id: this.props.id,
                         ref: "formItem",
-                        valueType: component.valueType
+                        "data-valueType": component.valueType
                     }, others);
                     var componentName = component.component.name || component.component.toString().match(/function\s*([^(]*)\(/)[1];
                     if (componentName === 'Input') {
-                        props.handleChange = this.handleChange.bind(this);
+                        props["data-handleChange"] = this.handleChange.bind(this);
                     } else if (componentName === 'TextArea') {
                         this._areaLabel = true;
-                        props.handleChange = this.handleChange.bind(this);
+                        props["data-handleChange"] = this.handleChange.bind(this);
                     } else {
                         props.onChange = this.onChange.bind(this);
                     }
@@ -158,7 +158,7 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                         var others = Omit(_this2.props, ["className", "children", "layout", "rules", "messages", "isFormItem", "onValid", "onChange", "label", "labelGrid"]);
                         var props = _extends({
                             key: index,
-                            valueType: registerComp.valueType,
+                            "data-valueType": registerComp.valueType,
                             ref: "formItem"
                         }, others);
 
@@ -167,7 +167,7 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                         var componentName = child.type.name || child.type.toString().match(/function\s*([^(]*)\(/)[1];
 
                         if (componentName === 'Input' || componentName === 'TextArea') {
-                            props.handleChange = _this2.handleChange.bind(_this2);
+                            props["data-handleChange"] = _this2.handleChange.bind(_this2);
                             if (componentName === 'TextArea') {
                                 _this2._areaLabel = true;
                             }
@@ -333,8 +333,8 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
             key: "componentDidMount",
             value: function componentDidMount() {
                 this.item = this.refs["formItem"];
-                if (this.props.itemBind && this.isFormItem()) {
-                    this.props.itemBind({
+                if (this.props["data-itemBind"] && this.isFormItem()) {
+                    this.props["data-itemBind"]({
                         ref: this,
                         name: this.props.name,
                         isFormItem: this.isFormItem()
