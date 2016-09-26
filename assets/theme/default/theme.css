@@ -721,7 +721,7 @@ a:focus {
 }
 .cm-form-group.input-group .input-group-addon {
   display: inline-block;
-  padding: 6px 12px;
+  padding: 7px 12px;
   font-size: 14px;
   font-weight: 400;
   line-height: 1;
@@ -1894,4 +1894,18 @@ a:focus {
   background: #000;
   background: rgba(0, 0, 0, 0.2);
   filter: alpha(opacity=20);
+}
+.cm-divider {
+  height: 0;
+  margin: 1.5rem auto;
+  overflow: hidden;
+  clear: both;
+  border-top: 1px solid #ddd;
+  max-width: none;
+}
+.cm-divider.dotted {
+  border-top: 1px dotted #ccc;
+}
+.cm-divider.dashed {
+  border-top: 1px dashed #ccc;
 }
