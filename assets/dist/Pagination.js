@@ -162,7 +162,8 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
                 _current: props.current,
                 pageSize: props.pageSize,
                 total: props.total,
-                displayedPages: 5
+                displayedPages: 5,
+                displayInfo: _this4.props.displayInfo != undefined ? _this4.props.displayInfo : true
             });
             return _this4;
         }
@@ -234,7 +235,7 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
                         pageSize: size
                     });
                     if (this.state.current > this._calcPage(size)) {
-                        current = this._calcPage(size);
+                        current = this._calcPage(size) || 1;
                         this.setState({
                             current: current,
                             _current: current
@@ -402,19 +403,20 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
                     }
                 }
 
+                var className = classnames("cm-pagination", this.state.theme, this.props.className, this.props.shape);
                 return React.createElement(
                     "div",
-                    { className: "data-page pull-right mt-10" },
+                    { className: className },
                     React.createElement(
                         "ul",
-                        { className: "pagination", style: { float: "left" } },
+                        { style: { float: "left" } },
                         React.createElement(PagePrev, { current: current, onClick: this._prev.bind(this, null) }),
                         pagerList,
                         React.createElement(PageNext, { current: current, onClick: this._next.bind(this, null), disabled: current == pages })
                     ),
-                    React.createElement(
+                    this.state.displayInfo ? React.createElement(
                         "div",
-                        { style: { display: "inline-block", float: "left", margin: "25px 0" } },
+                        { className: "pagination-info" },
                         React.createElement(
                             "span",
                             { className: "ml-10" },
@@ -453,10 +455,10 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
                             "span",
                             { className: "page-code" },
                             "到第 ",
-                            React.createElement("input", { name: "pageNum", ref: "pageNum", autoComplete: "off", value: this.state.current, onChange: this.goToPage.bind(this, null), type: "text", style: { width: "40px" } }),
+                            React.createElement("input", { name: "pageNum", className: "pageNum", ref: "pageNum", autoComplete: "off", value: this.state.current, onChange: this.goToPage.bind(this, null), type: "text", style: { width: "40px" } }),
                             "页"
                         )
-                    )
+                    ) : null
                 );
             }
         }]);

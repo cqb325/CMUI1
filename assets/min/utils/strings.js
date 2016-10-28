@@ -1,0 +1,2 @@
+/** ! created at <%= grunt.template.today("yyyy-mm-dd") by cqb %> */
+define(["exports"],function(a){"use strict";function b(a,b){return"string"==typeof a?a.replace(/\\?\{([^{}]+)\}/g,function(a,c){return"\\"===a.charAt(0)?a.slice(1):null===b[c]||void 0===b[c]?"":b[c]}):"function"==typeof a?a(b):void 0}Object.defineProperty(a,"__esModule",{value:!0}),a.substitute=b});

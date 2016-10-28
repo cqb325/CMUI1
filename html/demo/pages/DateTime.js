@@ -137,7 +137,7 @@ define(['module', 'react', 'react-dom', 'classnames', 'DateTime', "./Tile"], fun
                     React.createElement(
                         Tile,
                         { header: "只选择年份" },
-                        React.createElement(DateTime, { yearOnly: 'true' }),
+                        React.createElement(DateTime, { yearOnly: 'true', format: 'YYYY' }),
                         React.createElement(
                             'pre',
                             { className: 'brush: js', ref: 'code5' },

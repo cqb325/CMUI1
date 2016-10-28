@@ -32,6 +32,7 @@ const Panel = require('../../html/demo/pages/Panel/Panel');
 const MessageBox = require('../../html/demo/pages/Panel/MessageBox');
 const Dialog = require('../../html/demo/pages/Panel/Dialog');
 const Divider = require('../../html/demo/pages/Divider');
+const AutoComplete = require('../../html/demo/pages/AutoComplete');
 
 const ReactRouter = require('ReactRouter');
 const Router = ReactRouter.Router;
@@ -79,7 +80,8 @@ const APP = {
             {id:"152", text: "MessageBox",icon: "fa fa-folder",link: "MessageBox", component: MessageBox},
             {id:"153", text: "Dialog",icon: "fa fa-folder",link: "Dialog", component: Dialog}
         ]},
-        {id:"16", text: "Divider",icon: "fa fa-cog",link: "Divider", component: Divider}
+        {id:"16", text: "Divider",icon: "fa fa-cog",link: "Divider", component: Divider},
+        {id:"17", text: "AutoComplete",icon: "fa fa-cog",link: "AutoComplete", component: AutoComplete}
     ]
 };
 

@@ -1,0 +1,2 @@
+/** ! created at <%= grunt.template.today("yyyy-mm-dd") by cqb %> */
+define(["module"],function(a){"use strict";a.exports=function(a,b){var c={};if(a)for(var d in a){var e=!1;for(var f in b)b[f]==d&&(e=!0);!e&&a.hasOwnProperty(d)&&(c[d]=a[d])}return c}});

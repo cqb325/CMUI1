@@ -91,6 +91,8 @@ define(['module', 'react', 'react-dom', 'Pagination', "./Tile"], function (modul
                         Tile,
                         { header: "基本使用" },
                         React.createElement(Pagination, { current: 10, pageSize: 10, total: 1000, onChange: pageChange }),
+                        React.createElement(Pagination, { shape: 'circle', theme: 'cyan', current: 10, pageSize: 10, total: 1000, onChange: pageChange }),
+                        React.createElement(Pagination, { shape: 'none', displayInfo: false, theme: 'cyan', current: 10, pageSize: 10, total: 1000, onChange: pageChange }),
                         React.createElement(
                             'pre',
                             { className: 'brush: js', ref: 'code1' },

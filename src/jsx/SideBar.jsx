@@ -176,7 +176,7 @@ class SideBar extends BaseComponent {
      */
     setActiveStatus(item){
         if(typeof item === "string"){
-            item = this.getItem(id);
+            item = this.getItem(item);
         }
 
         this._onSelect(item, true);

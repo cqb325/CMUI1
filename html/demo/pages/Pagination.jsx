@@ -36,6 +36,10 @@ class PaginationPage extends Component{
                 <Tile header={"基本使用"}>
                     <Pagination current={10} pageSize={10} total={1000} onChange={pageChange}></Pagination>
 
+                    <Pagination shape="circle" theme="cyan" current={10} pageSize={10} total={1000} onChange={pageChange}></Pagination>
+
+                    <Pagination shape="none" displayInfo={false} theme="cyan" current={10} pageSize={10} total={1000} onChange={pageChange}></Pagination>
+
                     <pre className="brush: js" ref="code1">
                         {
 `

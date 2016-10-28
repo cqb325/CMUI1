@@ -74,7 +74,7 @@ class DateTimePage extends Component{
                 </Tile>
 
                 <Tile header={"只选择年份"}>
-                    <DateTime yearOnly="true"></DateTime>
+                    <DateTime yearOnly="true" format="YYYY"></DateTime>
 
                     <pre className="brush: js" ref="code5">
                         {

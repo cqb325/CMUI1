@@ -16,8 +16,13 @@ module.exports = function(grunt) {
                 banner: '/** ! created at <%= grunt.template.today("yyyy-mm-dd") by cqb %> */\n'
             },
             dist: {
-                files: {
-                }
+                files: [{
+                    expand: true,
+                    cwd: 'assets/dist',
+                    src: ['**/*.js'],
+                    dest: './assets/min',
+                    ext: '.js'
+                }]
             }
         },
         less: {
@@ -98,7 +103,7 @@ module.exports = function(grunt) {
         watch: {
             jsx: {
                 files: ['src/**/*.jsx','html/**/*.jsx'],
-                tasks: ["babel"]
+                tasks: ["babel","uglify"]
             },
             less: {
                 files: ['src/theme/**/*.less'],

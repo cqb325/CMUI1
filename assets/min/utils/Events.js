@@ -1,0 +1,2 @@
+/** ! created at <%= grunt.template.today("yyyy-mm-dd") by cqb %> */
+define(["exports"],function(a){"use strict";function b(a,b,c){a.addEventListener?a.addEventListener(b,c):a.attachEvent("on"+b,function(){c.call(a)})}function c(a,b,c){a.removeEventListener?a.removeEventListener(b,c):a.detachEvent("on"+b,c)}function d(a,c,d){for(var e=c.split(" "),f=function a(b){return b.target.removeEventListener(b.type,a),d(b)},g=e.length-1;g>=0;g--)b(a,e[g],f)}Object.defineProperty(a,"__esModule",{value:!0}),a.on=b,a.off=c,a.once=d});

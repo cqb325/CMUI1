@@ -75,7 +75,8 @@ class Pagination extends BaseComponent {
             _current: props.current,
             pageSize: props.pageSize,
             total: props.total,
-            displayedPages: 5
+            displayedPages: 5,
+            displayInfo: this.props.displayInfo != undefined ?  this.props.displayInfo : true
         });
     }
 
@@ -165,7 +166,7 @@ class Pagination extends BaseComponent {
                 pageSize: size
             });
             if (this.state.current > this._calcPage(size)) {
-                current = this._calcPage(size);
+                current = this._calcPage(size) || 1;
                 this.setState({
                     current: current,
                     _current: current
@@ -356,26 +357,30 @@ class Pagination extends BaseComponent {
             }
         }
 
+        let className = classnames("cm-pagination", this.state.theme, this.props.className, this.props.shape);
         return (
-            <div className="data-page pull-right mt-10">
-                <ul className="pagination" style={{float: "left"}}>
+            <div className={className}>
+                <ul style={{float: "left"}}>
                     <PagePrev current={current} onClick={this._prev.bind(this, null)}/>
                     {pagerList}
                     <PageNext current={current} onClick={this._next.bind(this, null)} disabled={current==pages}/>
                 </ul>
-                <div style={{display: "inline-block",float: "left", margin: "25px 0"}}>
-                    <span className="ml-10">共{pages}页</span>&nbsp;
-                    <span className="page-code">
-                        每页<select name="pageSize" className="pageSize" value={this.state.pageSize} ref="pageSize" onChange={this._selectPageSize.bind(this, null)}>
-                        <option value="10">10</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>条
-                    </span>&nbsp;
-                    <span className="page-code">
-                        到第 <input name="pageNum" ref="pageNum" autoComplete="off" value={this.state.current} onChange={this.goToPage.bind(this, null)} type="text" style={{width: "40px"}}/>页
-                    </span>
-                </div>
+                {this.state.displayInfo ?
+                    <div className="pagination-info">
+                        <span className="ml-10">共{pages}页</span>&nbsp;
+                        <span className="page-code">
+                            每页<select name="pageSize" className="pageSize" value={this.state.pageSize} ref="pageSize" onChange={this._selectPageSize.bind(this, null)}>
+                            <option value="10">10</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>条
+                        </span>&nbsp;
+                        <span className="page-code">
+                            到第 <input name="pageNum" className="pageNum" ref="pageNum" autoComplete="off" value={this.state.current} onChange={this.goToPage.bind(this, null)} type="text" style={{width: "40px"}}/>页
+                        </span>
+                    </div>
+                    : null
+                }
             </div>
         );
     }

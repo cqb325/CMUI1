@@ -240,7 +240,7 @@ define(["module", "react", "classnames", "core/BaseComponent", "utils/shallowEqu
             key: "setActiveStatus",
             value: function setActiveStatus(item) {
                 if (typeof item === "string") {
-                    item = this.getItem(id);
+                    item = this.getItem(item);
                 }
 
                 this._onSelect(item, true);

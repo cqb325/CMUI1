@@ -1,0 +1,2 @@
+/** ! created at <%= grunt.template.today("yyyy-mm-dd") by cqb %> */
+define(["module"],function(a){"use strict";var b={easeOutFunction:"cubic-bezier(0.23, 1, 0.32, 1)",easeInOutFunction:"cubic-bezier(0.445, 0.05, 0.55, 0.95)",easeOut:function(a,b,c,d){if(d=d||this.easeOutFunction,b&&"[object Array]"===Object.prototype.toString.call(b)){for(var e="",f=0;f<b.length;f++)e&&(e+=","),e+=this.create(a,b[f],c,d);return e}return this.create(a,b,c,d)},create:function(a,b,c,d){return a=a||"450ms",b=b||"all",c=c||"0ms",d=d||"linear",b+" "+a+" "+d+" "+c}};a.exports=b});
