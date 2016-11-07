@@ -40,4 +40,12 @@
 
         }
     });
+
+    require.ensure = function(module, callback){
+        require(module, function(){
+            if(callback){
+                callback.apply(this, arguments);
+            }
+        });
+    };
 })(window);

@@ -1,4 +1,5 @@
 @grey-text: #333;
+@lighter-white-text: #8A9095;
 @disabled-text: #ccc;
 
 @border-radius: 3px;
@@ -184,6 +185,40 @@
   .month:hover,
   .year:hover{
     background-color: #fff;
+  }
+
+  &.black{
+    .cm-datetime-wrap{
+      background: #29323F;
+    }
+    .date-picker-header {
+      a {
+        color: @lighter-white-text;
+      }
+    }
+    .week,
+    .month,
+    .year,
+    button.day{
+      color: #fff;
+    }
+
+    button.day{
+      &.today,
+      &:hover,
+      &.rangeSelect{
+        background-color: @lighter-white-text;
+      }
+      &.disabled,
+      &.gray{
+        color: @lighter-white-text;
+      }
+    }
+    .date-picker-footer a:hover,
+    .month:hover,
+    .year:hover{
+      background-color: @lighter-white-text;
+    }
   }
 }
 

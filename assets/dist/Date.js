@@ -239,6 +239,8 @@ define(["module", "react", "react-dom", "classnames", "moment", "utils/Dom", "co
                     };
 
                     this.valueChange(value, current.toDate());
+
+                    this.emit("hide");
                 } else {
                     state = {
                         stage: 2,
@@ -268,6 +270,8 @@ define(["module", "react", "react-dom", "classnames", "moment", "utils/Dom", "co
                     };
 
                     this.valueChange(value, current.toDate());
+
+                    this.emit("hide");
                 } else {
                     state = {
                         stage: 1,

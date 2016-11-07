@@ -171,6 +171,32 @@
 .cm-datetime .year:hover {
   background-color: #fff;
 }
+.cm-datetime.black .cm-datetime-wrap {
+  background: #29323F;
+}
+.cm-datetime.black .date-picker-header a {
+  color: #8A9095;
+}
+.cm-datetime.black .week,
+.cm-datetime.black .month,
+.cm-datetime.black .year,
+.cm-datetime.black button.day {
+  color: #fff;
+}
+.cm-datetime.black button.day.today,
+.cm-datetime.black button.day:hover,
+.cm-datetime.black button.day.rangeSelect {
+  background-color: #8A9095;
+}
+.cm-datetime.black button.day.disabled,
+.cm-datetime.black button.day.gray {
+  color: #8A9095;
+}
+.cm-datetime.black .date-picker-footer a:hover,
+.cm-datetime.black .month:hover,
+.cm-datetime.black .year:hover {
+  background-color: #8A9095;
+}
 .invalid .cm-datetime .date-text {
   border-color: #E05B5B;
 }

@@ -97,7 +97,8 @@ define(['module', 'react', 'react-dom', 'classnames', 'DateTime', "./Tile"], fun
                     React.createElement(
                         Tile,
                         { header: "日期时间" },
-                        React.createElement(DateTime, { startDate: '2016-04-05', endDate: '2016-04-15' }),
+                        React.createElement(DateTime, { startDate: '2016-04-05' }),
+                        React.createElement(DateTime, { theme: 'black' }),
                         React.createElement(
                             'pre',
                             { className: 'brush: js', ref: 'code1' },

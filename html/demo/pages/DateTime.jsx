@@ -35,7 +35,9 @@ class DateTimePage extends Component{
                     </pre>
                 </Tile>
                 <Tile header={"日期时间"}>
-                    <DateTime startDate="2016-04-05" endDate="2016-04-15"></DateTime>
+                    <DateTime startDate="2016-04-05" ></DateTime>
+
+                    <DateTime theme="black" ></DateTime>
 
                     <pre className="brush: js" ref="code1">
                         {

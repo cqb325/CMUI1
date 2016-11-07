@@ -79,7 +79,9 @@ define(["module", "react", "react-dom"], function (module, React, ReactDOM) {
                 }
 
                 setTimeout(function () {
-                    _this.setState({ style: from });
+                    if (_this.isMounted()) {
+                        _this.setState({ style: from });
+                    }
                 }, 10);
 
                 this.startTime++;

@@ -60,7 +60,9 @@ var Animation = React.createClass({
             }
 
             setTimeout(()=> {
-                this.setState({style: from});
+                if(this.isMounted()) {
+                    this.setState({style: from});
+                }
             }, 10);
 
             this.startTime++;

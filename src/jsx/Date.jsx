@@ -200,6 +200,8 @@ class Date extends BaseComponent {
             };
 
             this.valueChange(value, current.toDate());
+
+            this.emit("hide");
         }else {
             state = {
                 stage: 2,
@@ -231,6 +233,8 @@ class Date extends BaseComponent {
             };
 
             this.valueChange(value, current.toDate());
+
+            this.emit("hide");
         }else {
             state = {
                 stage: 1,
