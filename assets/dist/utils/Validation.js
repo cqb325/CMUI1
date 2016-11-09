@@ -123,6 +123,7 @@ define(['module', 'utils/strings'], function (module, strings) {
             noSpecial: "不能输入特殊字符",
             userName: "只能输入汉字字母和数字",
             mobile: "请输入合法的手机号",
+            remote: "请修正此字段",
             mixMaxLength: format("不能超过{0}个字符")
         }
     };

@@ -1,4 +1,4 @@
-define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'utils/omit', 'utils/regs', 'utils/Validation', 'Label'], function (module, React, classnames, BaseComponent, grids, Omit, Regs, Validation, Label) {
+define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'utils/omit', 'utils/regs', 'utils/Validation', 'Label', 'core/Ajax'], function (module, React, classnames, BaseComponent, grids, Omit, Regs, Validation, Label, Ajax) {
     "use strict";
 
     var _extends = Object.assign || function (target) {
@@ -66,14 +66,6 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
     var getGrid = grids.getGrid;
 
     var PropTypes = React.PropTypes;
-
-    /**
-     * FormControl 类
-     * 子元素只能有一个子元素控件
-     * @class FormControl
-     * @constructor
-     * @extend BaseComponent
-     */
 
     var FormControl = function (_BaseComponent) {
         _inherits(FormControl, _BaseComponent);
@@ -272,12 +264,27 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                     }
                 }
                 for (var method in rules) {
-                    if (method === "required") {
+                    if (method === "required" || "remote") {
                         continue;
                     }
                     rule = { method: method, parameters: rules[method] };
 
                     result = this.validByMethod(value, rule, messages);
+                    if (result == false) {
+                        return false;
+                    }
+                }
+                if (rules["remote"]) {
+                    var url = rules["remote"];
+                    var name = this.item.props.name;
+                    if (typeof url === 'function') {
+                        url = url();
+                    } else {
+                        url = this._URLParse(url);
+                        url = this._rebuildURL(url, { name: value });
+                    }
+
+                    result = this.validByRemote(value, url, messages);
                     if (result == false) {
                         return false;
                     }
@@ -290,6 +297,77 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
 
                 this.setState({ errorTip: null });
                 return true;
+            }
+        }, {
+            key: "_URLParse",
+            value: function _URLParse(url, otherParams) {
+                url = url.split("?");
+                var params = {};
+
+                if (url[1]) {
+                    var parts = url[1].split("=");
+                    if (parts.length) {
+                        parts.forEach(function (part) {
+                            var pair = part.split("&");
+                            params[pair[0]] = pair[1];
+                        });
+                    }
+                }
+                if (otherParams) {
+                    for (var key in otherParams) {
+                        params[key] = otherParams[key];
+                    }
+                }
+
+                return {
+                    pathname: url[0],
+                    query: params
+                };
+            }
+        }, {
+            key: "_rebuildURL",
+            value: function _rebuildURL(url) {
+                var suffix = [];
+                if (url.query) {
+                    for (var key in url.query) {
+                        suffix.push(key + "=" + url.query[key]);
+                    }
+                }
+                return url.pathname + "?" + suffix.join("&");
+            }
+        }, {
+            key: "validByRemote",
+            value: function validByRemote(value, url, messages) {
+                var remoteRet = false;
+                Ajax.ajax({
+                    url: url,
+                    type: "GET",
+                    dataType: "text",
+                    async: "false",
+                    success: function success(ret) {
+                        remoteRet = ret === "true";
+                    },
+                    error: function error() {
+                        remoteRet = false;
+                    }
+                });
+
+                var errorTip;
+                if (remoteRet === false) {
+                    errorTip = messages && messages["remote"] ? messages["remote"] : Validation.messages["remote"];
+                    if (typeof errorTip === 'function') {
+                        errorTip = errorTip.call(null, rule.parameters);
+                    }
+                    if (this._isMounted) {
+                        this.setState({ errorTip: errorTip });
+                    }
+                    if (this.props.onValid) {
+                        this.props.onValid(value, remoteRet, this);
+                    }
+                    this.emit("valid", value, remoteRet, this);
+                }
+
+                return remoteRet;
             }
         }, {
             key: "validByMethod",
@@ -330,8 +408,14 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                 }
             }
         }, {
+            key: "getReference",
+            value: function getReference() {
+                return this.refs["formItem"];
+            }
+        }, {
             key: "componentDidMount",
             value: function componentDidMount() {
+                this._isMounted = true;
                 this.item = this.refs["formItem"];
                 if (this.props["data-itemBind"] && this.isFormItem()) {
                     this.props["data-itemBind"]({
@@ -380,6 +464,11 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
             key: "setMessage",
             value: function setMessage(rule, message) {
                 this.messages[rule] = message;
+            }
+        }, {
+            key: "componentWillUnmount",
+            value: function componentWillUnmount() {
+                this._isMounted = false;
             }
         }, {
             key: "render",

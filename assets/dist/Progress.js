@@ -77,11 +77,21 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids'], f
         _createClass(Progress, [{
             key: "update",
             value: function update(value) {
-                if (this.isMounted()) {
+                if (this._isMounted) {
                     this.setState({
                         value: value
                     });
                 }
+            }
+        }, {
+            key: "componentDidMount",
+            value: function componentDidMount() {
+                this._isMounted = true;
+            }
+        }, {
+            key: "componentWillUnmount",
+            value: function componentWillUnmount() {
+                this._isMounted = false;
             }
         }, {
             key: "render",

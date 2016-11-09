@@ -114,6 +114,20 @@ define(["module", "react", "react-dom", "classnames", "core/BaseComponent", 'uti
                 return true;
             }
         }, {
+            key: "getFormControl",
+            value: function getFormControl(name) {
+                return this.items[name];
+            }
+        }, {
+            key: "getItem",
+            value: function getItem(name) {
+                if (this.items[name]) {
+                    return this.items[name].getReference();
+                }
+
+                return null;
+            }
+        }, {
             key: "itemBind",
             value: function itemBind(data) {
                 if (data.name && data.isFormItem) {
@@ -133,7 +147,17 @@ define(["module", "react", "react-dom", "classnames", "core/BaseComponent", 'uti
                 var _this2 = this;
 
                 return React.Children.map(this.props.children, function (child) {
-                    var componentName = child.type.name || child.type.toString().match(/function\s*([^(]*)\(/)[1];
+                    var componentName = "";
+                    if (child.type) {
+                        if (child.type.name) {
+                            componentName = child.type.name;
+                        } else {
+                            var matches = child.type.toString().match(/function\s*([^(]*)\(/);
+                            if (matches) {
+                                componentName = matches[1];
+                            }
+                        }
+                    }
                     if (componentName === 'FormControl') {
                         var props = _extends({
                             "data-itemBind": _this2.itemBind.bind(_this2)

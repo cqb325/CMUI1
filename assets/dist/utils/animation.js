@@ -48,7 +48,11 @@ define(["module", "react", "react-dom"], function (module, React, ReactDOM) {
         },
 
         componentDidMount: function componentDidMount() {
+            this._isMounted = true;
             this.resolveAnimationFrame();
+        },
+        componentWillUnmount: function componentWillUnmount() {
+            this._isMounted = false;
         },
 
 
@@ -79,7 +83,7 @@ define(["module", "react", "react-dom"], function (module, React, ReactDOM) {
                 }
 
                 setTimeout(function () {
-                    if (_this.isMounted()) {
+                    if (_this._isMounted) {
                         _this.setState({ style: from });
                     }
                 }, 10);

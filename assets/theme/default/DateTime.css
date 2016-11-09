@@ -192,10 +192,15 @@
 .cm-datetime.black button.day.gray {
   color: #8A9095;
 }
+.cm-datetime.black button.day:hover.disabled,
+.cm-datetime.black button.day:hover.gray {
+  color: #fff;
+}
 .cm-datetime.black .date-picker-footer a:hover,
 .cm-datetime.black .month:hover,
 .cm-datetime.black .year:hover {
   background-color: #8A9095;
+  color: #fff;
 }
 .invalid .cm-datetime .date-text {
   border-color: #E05B5B;
