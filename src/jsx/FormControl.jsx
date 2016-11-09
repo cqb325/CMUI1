@@ -13,6 +13,7 @@ const Regs = require('utils/regs');
 const Validation = require('utils/Validation');
 const Label = require('Label');
 const PropTypes = React.PropTypes;
+const Ajax = require('core/Ajax');
 
 
 /**
@@ -225,12 +226,27 @@ class FormControl extends BaseComponent {
             }
         }
         for(let method in rules){
-            if(method === "required"){
+            if(method === "required" || "remote"){
                 continue;
             }
             rule = { method: method, parameters: rules[ method ] };
 
             result = this.validByMethod(value, rule, messages);
+            if(result == false){
+                return false;
+            }
+        }
+        if(rules["remote"]){
+            let url = rules[ "remote" ];
+            var name = this.item.props.name;
+            if(typeof url === 'function'){
+                url = url();
+            }else{
+                url = this._URLParse(url);
+                url = this._rebuildURL(url, {name: value});
+            }
+
+            result = this.validByRemote(value, url, messages);
             if(result == false){
                 return false;
             }
@@ -243,6 +259,94 @@ class FormControl extends BaseComponent {
 
         this.setState({errorTip: null});
         return true;
+    }
+
+    /**
+     * 解析url
+     * @method _URLParse
+     * @param url
+     * @param otherParams
+     * @returns {{pathname: *, query: {}}}
+     * @private
+     */
+    _URLParse(url, otherParams){
+        url = url.split("?");
+        let params = {};
+
+        if(url[1]){
+            let parts = url[1].split("=");
+            if(parts.length){
+                parts.forEach(function(part){
+                    let pair = part.split("&");
+                    params[pair[0]] = pair[1];
+                });
+            }
+        }
+        if(otherParams){
+            for(let key in otherParams){
+                params[key] = otherParams[key];
+            }
+        }
+
+        return {
+            pathname: url[0],
+            query: params
+        }
+    }
+
+    /**
+     * 重构url
+     * @param url
+     * @returns {string}
+     * @private
+     */
+    _rebuildURL(url){
+        let suffix = [];
+        if(url.query){
+            for(let key in url.query){
+                suffix.push(key+"="+url.query[key]);
+            }
+        }
+        return url.pathname+"?"+suffix.join("&");
+    }
+
+    /**
+     * 远程验证字段
+     * @param value
+     * @param url
+     * @param messages
+     */
+    validByRemote(value, url, messages){
+        let remoteRet = false;
+        Ajax.ajax({
+            url: url,
+            type: "GET",
+            dataType: "text",
+            async: "false",
+            success: function(ret){
+                remoteRet = ret === "true";
+            },
+            error: function(){
+                remoteRet = false;
+            }
+        });
+
+        var errorTip;
+        if(remoteRet === false) {
+            errorTip = (messages && messages["remote"]) ? messages["remote"] : Validation.messages["remote"];
+            if (typeof errorTip === 'function') {
+                errorTip = errorTip.call(null, rule.parameters);
+            }
+            if(this._isMounted) {
+                this.setState({errorTip});
+            }
+            if (this.props.onValid) {
+                this.props.onValid(value, remoteRet, this);
+            }
+            this.emit("valid", value, remoteRet, this);
+        }
+
+        return remoteRet;
     }
 
     validByMethod(value, rule, messages){
@@ -282,7 +386,17 @@ class FormControl extends BaseComponent {
         }
     }
 
+    /**
+     * 获取表单元素
+     * @method getReference
+     * @returns {*}
+     */
+    getReference(){
+        return this.refs["formItem"];
+    }
+
     componentDidMount(){
+        this._isMounted = true;
         this.item = this.refs["formItem"];
         if(this.props["data-itemBind"] && this.isFormItem()){
             this.props["data-itemBind"]({
@@ -363,6 +477,10 @@ class FormControl extends BaseComponent {
      */
     setMessage(rule, message){
         this.messages[rule] = message;
+    }
+
+    componentWillUnmount(){
+        this._isMounted = false;
     }
 
     render(){

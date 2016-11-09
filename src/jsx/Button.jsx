@@ -4,6 +4,7 @@
  */
 
 const React = require("react");
+const PropTypes = React.PropTypes;
 const classnames = require("classnames");
 const BaseComponent = require("core/BaseComponent");
 const FontIcon = require('FontIcon');
@@ -43,6 +44,15 @@ class Button extends BaseComponent {
      */
     enable(elem) {
         this.setState({ disabled: false, show: elem });
+    }
+
+    /**
+     * 设置按钮的文字
+     * @method setText
+     * @param text {String} 要设置的按钮文字
+     */
+    setText(text){
+        this.setState(text);
     }
 
     /**
@@ -124,5 +134,62 @@ class Button extends BaseComponent {
         );
     }
 }
+
+Button.propTypes = {
+    /**
+     * 自定义class
+     * @attribute className
+     * @type {String}
+     */
+    className: PropTypes.string,
+    /**
+     * 自定义样式
+     * @attribute style
+     * @type {Object}
+     */
+    style: PropTypes.object,
+    /**
+     * 禁用
+     * @attribute disabled
+     * @type {Boolean}
+     */
+    disabled: PropTypes.bool,
+    /**
+     * 主题
+     * @attribute theme
+     * @type {String}
+     */
+    theme: PropTypes.string,
+    /**
+     * 升起效果
+     * @attribute raised
+     * @type {string/bool}
+     */
+    raised: PropTypes.oneOfType([PropTypes.string,PropTypes.bool]),
+    /**
+     * 无边框效果
+     * @attribute flat
+     * @type {string/bool}
+     */
+    flat: PropTypes.oneOfType([PropTypes.string,PropTypes.bool]),
+    /**
+     * 链接地址
+     * @attribute href
+     * @type {string}
+     */
+    href: PropTypes.string,
+    /**
+     * 图标
+     * @attribute icon
+     * @type {string}
+     */
+    icon: PropTypes.string,
+    /**
+     * 图标位置
+     * @attribute iconAlign
+     * @type {string}
+     */
+    iconAlign: PropTypes.oneOf(["left","right"])
+};
 
 module.exports = Button;

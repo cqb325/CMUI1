@@ -32,7 +32,12 @@ var Animation = React.createClass({
     },
 
     componentDidMount(){
+        this._isMounted = true;
         this.resolveAnimationFrame();
+    },
+
+    componentWillUnmount(){
+        this._isMounted = false;
     },
 
     render: function () {
@@ -60,7 +65,7 @@ var Animation = React.createClass({
             }
 
             setTimeout(()=> {
-                if(this.isMounted()) {
+                if(this._isMounted) {
                     this.setState({style: from});
                 }
             }, 10);

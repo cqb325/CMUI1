@@ -56,6 +56,30 @@ class Form extends BaseComponent {
     }
 
     /**
+     * 获取formControl
+     * @method getFormControl
+     * @param name {String} 字段名称
+     * @returns {*}
+     */
+    getFormControl(name){
+        return this.items[name];
+    }
+
+    /**
+     * 获取Form表单元素
+     * @method getItem
+     * @param name {String} 字段名称
+     * @returns {*}
+     */
+    getItem(name){
+        if(this.items[name]){
+            return this.items[name].getReference();
+        }
+
+        return null;
+    }
+
+    /**
      * 将子元素绑定到表单
      * @method itemBind
      * @param data 子元素数据
@@ -84,7 +108,17 @@ class Form extends BaseComponent {
      */
     renderChildren(){
         return React.Children.map(this.props.children, (child)=>{
-            let componentName = child.type.name || child.type.toString().match(/function\s*([^(]*)\(/)[1];
+            let componentName = "";
+            if(child.type){
+                if(child.type.name){
+                    componentName = child.type.name;
+                }else{
+                    let matches = child.type.toString().match(/function\s*([^(]*)\(/);
+                    if(matches){
+                        componentName = matches[1];
+                    }
+                }
+            }
             if(componentName === 'FormControl'){
                 let props = Object.assign({
                     "data-itemBind": this.itemBind.bind(this)

@@ -86,7 +86,7 @@ define(['module', 'react', '../BaseDemo', 'classnames', 'Input', 'CheckBoxGroup'
                         React.createElement(FormControl, { type: 'number', layout: 'stack', label: 'Number:', grid: 1 / 4 }),
                         React.createElement(FormControl, { type: 'integer', layout: 'stack', label: 'Integer:', rules: { max: 100 }, grid: 1 / 4 }),
                         React.createElement(FormControl, { type: 'tel', layout: 'stack', label: 'Email:', rules: { email: true }, grid: 1 / 4 }),
-                        React.createElement(FormControl, { type: 'text', layout: 'stack', label: 'UserName:', rules: { mixMaxLength: 12, noSpecial: true }, grid: 1 / 4 }),
+                        React.createElement(FormControl, { type: 'text', layout: 'stack', label: 'UserName:', rules: { mixMaxLength: 12, noSpecial: true, remote: "http://192.168.170.16:8415/mock/cmui/remote.html" }, grid: 1 / 4 }),
                         React.createElement(FormControl, { type: 'password', layout: 'stack', label: 'Password:', ref: 'password', labelGrid: 1 / 10 }),
                         React.createElement(FormControl, { type: 'password', layout: 'stack', label: 'RePassword:', rules: { equalTo: function equalTo() {
                                     return _this2.refs.password;

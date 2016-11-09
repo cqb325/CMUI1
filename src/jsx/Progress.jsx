@@ -27,11 +27,19 @@ class Progress extends BaseComponent {
     }
 
     update(value){
-        if(this.isMounted()) {
+        if(this._isMounted) {
             this.setState({
                 value: value
             });
         }
+    }
+
+    componentDidMount(){
+        this._isMounted = true;
+    }
+
+    componentWillUnmount(){
+        this._isMounted = false;
     }
 
     render(){

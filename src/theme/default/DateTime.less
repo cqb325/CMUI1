@@ -213,11 +213,18 @@
       &.gray{
         color: @lighter-white-text;
       }
+      &:hover{
+        &.disabled,
+        &.gray{
+          color: #fff;
+        }
+      }
     }
     .date-picker-footer a:hover,
     .month:hover,
     .year:hover{
       background-color: @lighter-white-text;
+      color: #fff;
     }
   }
 }

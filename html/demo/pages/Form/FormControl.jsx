@@ -56,7 +56,7 @@ class InputPage extends BaseDemo{
                     <FormControl type="number" layout="stack" label="Number:" grid={1/4}></FormControl>
                     <FormControl type="integer" layout="stack" label="Integer:" rules={{max: 100}} grid={1/4}></FormControl>
                     <FormControl type="tel" layout="stack" label="Email:" rules={{email: true}} grid={1/4}></FormControl>
-                    <FormControl type="text" layout="stack" label="UserName:" rules={{mixMaxLength: 12, noSpecial: true}} grid={1/4}></FormControl>
+                    <FormControl type="text" layout="stack" label="UserName:" rules={{mixMaxLength: 12, noSpecial: true,remote: "http://192.168.170.16:8415/mock/cmui/remote.html"}} grid={1/4}></FormControl>
 
                     <FormControl type="password" layout="stack" label="Password:" ref="password" labelGrid={1/10}></FormControl>
                     <FormControl type="password" layout="stack" label="RePassword:" rules={{equalTo: ()=>{return this.refs.password}}} labelGrid={1/10}></FormControl>
