@@ -2,7 +2,8 @@
  * @author cqb 2016-04-17.
  * @module Button
  */
-
+const classes = require('./classes');
+const mutation = require('./mutation');
 
 function tryParseInt(p) {
     if (!p) {
@@ -400,6 +401,20 @@ class Dom {
     }
 
     /**
+     * 获取元素的宽度
+     * @method getOuterWidth
+     * @param el
+     * @returns {*}
+     */
+    static getOuterWidth (el) {
+        return el.offsetWidth
+            + tryParseInt(el.style.borderLeftWidth)
+            + tryParseInt(el.style.borderRightWidth)
+            + tryParseInt(el.style.marginLeft)
+            + tryParseInt(el.style.marginRight);
+    }
+
+    /**
      * 监测是否超出页面底部
      * method overView
      * @param el
@@ -443,6 +458,9 @@ class Dom {
 
     static parseHTML(html){
         if (typeof html !== 'string') {
+            if(html.nodeType && html.nodeType === 1){
+                return [html];
+            }
             throw new TypeError('String expected');
         }
 
@@ -917,6 +935,36 @@ proto.empty = function() {
         mutation.empty(this[i]);
     }
     return this;
+};
+
+proto.show = function() {
+    for (var i=0 ; i<this.length ; ++i) {
+        this[i].style.display = this[i].org_display ? this[i].org_display : "block";
+    }
+    return this;
+};
+
+proto.hide = function() {
+    for (var i=0 ; i<this.length ; ++i) {
+        this[i].org_display = this[i].style.display
+        this[i].style.display = "none";
+    }
+    return this;
+};
+
+proto.width = function (isouter) {
+    if(isouter) {
+        return Dom.getOuterWidth(this[0]);
+    }else{
+        return this[0].offsetWidth;
+    }
+};
+proto.height = function (isouter) {
+    if(isouter) {
+        return Dom.getOuterHeight(this[0]);
+    }else{
+        return this[0].offsetHeight;
+    }
 };
 
 module.exports = Dom;

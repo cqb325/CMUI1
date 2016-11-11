@@ -1,4 +1,4 @@
-define(['module'], function (module) {
+define(['module', './classes', './mutation'], function (module, classes, mutation) {
     'use strict';
 
     function _classCallCheck(instance, Constructor) {
@@ -24,11 +24,6 @@ define(['module'], function (module) {
             return Constructor;
         };
     }();
-
-    /**
-     * @author cqb 2016-04-17.
-     * @module Button
-     */
 
     function tryParseInt(p) {
         if (!p) {
@@ -313,6 +308,11 @@ define(['module'], function (module) {
                 return height;
             }
         }, {
+            key: 'getOuterWidth',
+            value: function getOuterWidth(el) {
+                return el.offsetWidth + tryParseInt(el.style.borderLeftWidth) + tryParseInt(el.style.borderRightWidth) + tryParseInt(el.style.marginLeft) + tryParseInt(el.style.marginRight);
+            }
+        }, {
             key: 'overView',
             value: function overView(el) {
                 var pad = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
@@ -344,6 +344,9 @@ define(['module'], function (module) {
             key: 'parseHTML',
             value: function parseHTML(html) {
                 if (typeof html !== 'string') {
+                    if (html.nodeType && html.nodeType === 1) {
+                        return [html];
+                    }
                     throw new TypeError('String expected');
                 }
 
@@ -821,6 +824,36 @@ define(['module'], function (module) {
             mutation.empty(this[i]);
         }
         return this;
+    };
+
+    proto.show = function () {
+        for (var i = 0; i < this.length; ++i) {
+            this[i].style.display = this[i].org_display ? this[i].org_display : "block";
+        }
+        return this;
+    };
+
+    proto.hide = function () {
+        for (var i = 0; i < this.length; ++i) {
+            this[i].org_display = this[i].style.display;
+            this[i].style.display = "none";
+        }
+        return this;
+    };
+
+    proto.width = function (isouter) {
+        if (isouter) {
+            return Dom.getOuterWidth(this[0]);
+        } else {
+            return this[0].offsetWidth;
+        }
+    };
+    proto.height = function (isouter) {
+        if (isouter) {
+            return Dom.getOuterHeight(this[0]);
+        } else {
+            return this[0].offsetHeight;
+        }
     };
 
     module.exports = Dom;

@@ -49,7 +49,8 @@ const APP = {
             {id:"153", text: "Dialog",icon: "fa fa-folder",link: "Panel/Dialog"}
         ]},
         {id:"16", text: "Divider",icon: "fa fa-cog",link: "Divider"},
-        {id:"17", text: "AutoComplete",icon: "fa fa-cog",link: "AutoComplete"}
+        {id:"17", text: "AutoComplete",icon: "fa fa-cog",link: "AutoComplete"},
+        {id:"18", text: "Tooltip",icon: "fa fa-cog",link: "Tooltip/Tooltip"}
     ]
 };
 

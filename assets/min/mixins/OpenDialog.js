@@ -1,0 +1,2 @@
+/** ! created at <%= grunt.template.today("yyyy-mm-dd") by cqb %> */
+define(["module"],function(a){"use strict";a.exports={componentDidUpdate:function(){var a=this,b=function(b){var c=a.refs[b];if(c.refs&&"dialog"==c.props["data-toggle"]){var d=function(){var b=c.props["data-target"],d=a.refs[b];if(d&&d.open)return d.open(),void(c.props["data-data"]&&d.setData(c.props["data-data"]))};c.__islistened||(c.__islistened=!0,c.on("click",d))}};for(var c in this.refs)b(c)}}});
