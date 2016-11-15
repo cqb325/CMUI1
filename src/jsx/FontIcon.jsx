@@ -23,15 +23,22 @@ class FontIcon extends BaseComponent {
             icon,
             spin,
             pulse,
-            title
+            title,
+            font
         } = this.props;
 
-        let size = this.props.size ? "fa-"+this.props.size : false;
-        let rotate = this.props.rotate ? "fa-rotate-"+this.props.rotate : false;
-        let className = classnames("fa", "fa-"+icon, size, this.props.className,{
-            "fa-spin": spin,
-            "fa-pulse": pulse
-        }, rotate);
+        let className = "";
+        //自定义字体
+        if(font){
+            className = classnames(font, font+"-"+icon, this.props.className);
+        }else {
+            let size = this.props.size ? "fa-" + this.props.size : false;
+            let rotate = this.props.rotate ? "fa-rotate-" + this.props.rotate : false;
+            className = classnames("fa", "fa-" + icon, size, this.props.className, {
+                "fa-spin": spin,
+                "fa-pulse": pulse
+            }, rotate);
+        }
 
         let style = this.props.style || {};
         if(this.props.color){
@@ -51,7 +58,13 @@ FontIcon.propTypes = {
      * @attribute icon
      * @type {String}
      */
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    /**
+     * 自定义图标的名称
+     * @attribute font
+     * @type {String}
+     */
+    font: PropTypes.string
 };
 
 module.exports = FontIcon;

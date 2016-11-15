@@ -68,14 +68,21 @@ define(["module", "react", "classnames", "core/BaseComponent"], function (module
                 var spin = _props.spin;
                 var pulse = _props.pulse;
                 var title = _props.title;
+                var font = _props.font;
 
 
-                var size = this.props.size ? "fa-" + this.props.size : false;
-                var rotate = this.props.rotate ? "fa-rotate-" + this.props.rotate : false;
-                var className = classnames("fa", "fa-" + icon, size, this.props.className, {
-                    "fa-spin": spin,
-                    "fa-pulse": pulse
-                }, rotate);
+                var className = "";
+                //自定义字体
+                if (font) {
+                    className = classnames(font, font + "-" + icon, this.props.className);
+                } else {
+                    var size = this.props.size ? "fa-" + this.props.size : false;
+                    var rotate = this.props.rotate ? "fa-rotate-" + this.props.rotate : false;
+                    className = classnames("fa", "fa-" + icon, size, this.props.className, {
+                        "fa-spin": spin,
+                        "fa-pulse": pulse
+                    }, rotate);
+                }
 
                 var style = this.props.style || {};
                 if (this.props.color) {
@@ -98,7 +105,13 @@ define(["module", "react", "classnames", "core/BaseComponent"], function (module
          * @attribute icon
          * @type {String}
          */
-        icon: PropTypes.string
+        icon: PropTypes.string,
+        /**
+         * 自定义图标的名称
+         * @attribute font
+         * @type {String}
+         */
+        font: PropTypes.string
     };
 
     module.exports = FontIcon;

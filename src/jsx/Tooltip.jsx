@@ -27,7 +27,7 @@ class Tooltip extends BaseComponent {
         });
 
         //鼠标移走后延迟隐藏
-        this.delay = this.props.delay || 1000;
+        this.delay = this.props.delay || 0;
         this.offset = {x: 0, y: 0};
         if(this.props.offset){
             Object.assign(this.offset, this.props.offset);
@@ -35,11 +35,15 @@ class Tooltip extends BaseComponent {
     }
 
     _renderTitle(){
-        return <div className="cm-tooltip-tile">{this.state.title}</div>;
+        if(this.state.title) {
+            return <div className="cm-tooltip-tile">{this.state.title}</div>;
+        }else{
+            return null;
+        }
     }
 
     _renderContent(){
-        return <div className="cm-tooltip-content">{this.state.content}</div>;
+        return <div className="cm-tooltip-content">{this.state.content||this.props.children}</div>;
     }
 
     bind(target){
@@ -48,22 +52,54 @@ class Tooltip extends BaseComponent {
         }
 
         let targetEle = ReactDOM.findDOMNode(target);
-        let timer = null;
-        Events.on(targetEle, "mouseover", (e)=> {
-            this.calculatePosition(e.target || e.srcElement);
+        this._targetEle = targetEle;
+        this._timer = null;
+        let trigger = this.props.trigger || "hover";
+        let showEvent,hideEvent;
+        this.status = "hide";
+        if(trigger === "hover"){
+            showEvent = "mouseover";
+            hideEvent = "mouseout";
+        }else if(trigger === "toggle"){
+            showEvent = "click";
+        }
+        Events.on(targetEle, showEvent, (e)=> {
+            this.show(e, trigger);
+        });
+        Events.on(targetEle, hideEvent, (e)=>{
+            this.hide(e);
+        });
+    }
+
+    getTarget(){
+        return this._targetEle;
+    }
+
+    show(e, trigger){
+        if(this.status === "hide") {
+            this.calculatePosition(e ? (e.target || e.srcElement) : this._targetEle);
             let tip = Dom.dom(ReactDOM.findDOMNode(this));
             tip.addClass("slide");
-            if(timer){
-                clearTimeout(timer);
+            if (this._timer) {
+                clearTimeout(this._timer);
             }
-        });
-        Events.on(targetEle, "mouseout", (e)=>{
+            this.status = "show";
+        }else{
+            if(e && trigger === "toggle" && this.status === "show"){
+                this.hide();
+            }
+        }
+    }
+
+    hide(e){
+        if(this.status === "show") {
             let tip = Dom.dom(ReactDOM.findDOMNode(this));
-            timer = setTimeout(()=>{
+            this._timer = setTimeout(()=> {
                 tip.removeClass("slide");
                 tip.hide();
+                this.status = "hide";
             }, this.delay);
-        });
+        }
     }
 
     calculatePosition(ele){

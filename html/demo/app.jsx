@@ -17,7 +17,8 @@ const APP = {
         {id:"3", text: "Grids",icon: "fa fa-th",link: "Grids"},
         {id:"4", text: "FontIcon",icon: "fa fa-flag", children: [
             {id:"41", text: "FontIcon",link: "FontIcon/FontIcon"},
-            {id:"42", text: "AllIcons",link: "FontIcon/AllIcons"}
+            {id:"42", text: "AllIcons",link: "FontIcon/AllIcons"},
+            {id:"43", text: "CustomIcon",link: "FontIcon/CustomFontIcon"}
         ]},
         {id:"5", text: "Table",icon: "fa fa-table",link: "Table"},
         {id:"6", text: "Pagination",icon: "fa fa-ellipsis-h",link: "Pagination"},

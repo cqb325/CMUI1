@@ -91,25 +91,25 @@
 .cm-tooltip.danger {
   background: #E05B5B;
   color: #ededed;
-  background: -webkit-linear-gradient(top, lighter(#E05B5B, 30%) 0%, #E05B5B 100%);
+  background: -webkit-linear-gradient(top, #e88686 0%, #E05B5B 100%);
 }
 .cm-tooltip.danger.top:before {
   border-top-color: #E05B5B;
 }
 .cm-tooltip.danger.bottom:before {
-  border-bottom-color: lighter(#E05B5B, 30%);
+  border-bottom-color: #e88686;
   top: auto;
   bottom: 100%;
 }
 .cm-tooltip.danger.left:before {
-  border-left-color: lighter(#E05B5B, 15%);
+  border-left-color: #e47070;
   left: 100%;
   top: 50%;
   margin-left: 0;
   margin-top: -6px;
 }
 .cm-tooltip.danger.right:before {
-  border-right-color: lighter(#E05B5B, 15%);
+  border-right-color: #e47070;
   right: 100%;
   left: auto;
   top: 50%;

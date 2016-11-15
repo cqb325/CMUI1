@@ -1,0 +1,2 @@
+/** ! created at <%= grunt.template.today("yyyy-mm-dd") by cqb %> */
+define(["module"],function(a){"use strict";a.exports={componentDidMount:function(){for(var a in this.refs){var b=this.refs[a];if(b.refs&&"tooltip"==b.props["data-toggle"]&&!b.__islistened){b.__islistened=!0;var c=b.props["data-target"],d=this.refs[c];b.bind&&b.bind(d)}}}}});
