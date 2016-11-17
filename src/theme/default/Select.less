@@ -23,7 +23,7 @@
     border-radius: @border-radius;
     color: @grey-text;
     min-width: 150px;
-    display: inline-block;
+    display: block;
     background-color: #fff;
     background-image: none;
     transition: border-color ease-in-out .15s;
@@ -148,6 +148,11 @@
     }
     .cm-select-cert:before {
       border-top-color: #eee;
+    }
+  }
+  &.cm-autocomplete{
+    .cm-select-value{
+      display: inline-block;
     }
   }
 }

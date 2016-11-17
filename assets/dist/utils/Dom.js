@@ -764,7 +764,7 @@ define(['module', './classes', './mutation'], function (module, classes, mutatio
 
     proto.getStyle = function (prop) {
         var el = this[0];
-        if (el) return el.style[prop];
+        if (el) return Dom.css(el, prop);
     };
     proto.parent = function () {
         var els = [];

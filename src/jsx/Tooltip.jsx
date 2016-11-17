@@ -58,8 +58,8 @@ class Tooltip extends BaseComponent {
         let showEvent,hideEvent;
         this.status = "hide";
         if(trigger === "hover"){
-            showEvent = "mouseover";
-            hideEvent = "mouseout";
+            showEvent = "mouseenter";
+            hideEvent = "mouseleave";
         }else if(trigger === "toggle"){
             showEvent = "click";
         }
@@ -92,7 +92,7 @@ class Tooltip extends BaseComponent {
     }
 
     hide(e){
-        if(this.status === "show") {
+        if(this.status === "show" && this._isMounted) {
             let tip = Dom.dom(ReactDOM.findDOMNode(this));
             this._timer = setTimeout(()=> {
                 tip.removeClass("slide");
@@ -111,6 +111,12 @@ class Tooltip extends BaseComponent {
         let height = ele.height();
 
         let tip = ReactDOM.findDOMNode(this);
+
+        if(tip.parentNode == ele[0] && Dom.css(ele[0], "position") === "relative"){
+            top = 0;
+            left = 0;
+        }
+
         Dom.dom(tip).show();
         let tipWidth = Dom.dom(tip).width();
         let tipHeight = Dom.dom(tip).height();
@@ -154,6 +160,17 @@ class Tooltip extends BaseComponent {
         }
 
         Dom.dom(tip).css(css);
+    }
+
+    componentDidMount(){
+        this._isMounted = true;
+        if(this.props.bindTarget){
+            this.bind(this.props.bindTarget);
+        }
+    }
+
+    componentWillUnmount(){
+        this._isMounted = false;
     }
 
     render(){

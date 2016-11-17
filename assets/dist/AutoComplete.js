@@ -414,7 +414,7 @@ define(["module", "react", 'react-dom', "./classnames", "./core/BaseComponent", 
                 var style = _props2.style;
                 var grid = _props2.grid;
 
-                className = classnames("cm-select", getGrid(grid), {
+                className = classnames("cm-select", "cm-autocomplete", getGrid(grid), {
                     active: this.state.active,
                     disabled: disabled || readOnly,
                     dropup: this.state.dropup,
