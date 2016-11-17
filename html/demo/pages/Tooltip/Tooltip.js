@@ -68,7 +68,6 @@ define(['module', 'react', 'react-dom', 'Tooltip', 'Button', "../Tile", "mixins/
                         '触发对象'
                     ),
                     React.createElement(Tooltip, { theme: 'danger', trigger: 'none', align: 'right', ref: 'tooltip6', content: 'asdasdasdasdasdasdasdasdasdasda' }),
-                    React.createElement(Tooltip, { theme: 'danger', align: 'top', bindTarget: this, content: 'asdasdasdasdasdasdasdasdasdasda' }),
                     React.createElement(
                         'div',
                         { ref: 'target2', style: { width: "100px", height: "100px", "marginTop": "100px", "marginLeft": "400px", "background": "#ff0000", "color": "#fff" } },

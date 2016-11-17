@@ -875,7 +875,7 @@ proto.setStyle = function(prop, val){
 
 proto.getStyle = function(prop) {
     var el = this[0];
-    if (el) return Dom.css(el, prop);
+    if (el) return el.style[prop];
 };
 proto.parent = function() {
     var els = [];

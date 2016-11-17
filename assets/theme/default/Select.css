@@ -14,7 +14,7 @@
   border-radius: 2px;
   color: #333;
   min-width: 150px;
-  display: block;
+  display: inline-block;
   background-color: #fff;
   background-image: none;
   transition: border-color ease-in-out 0.15s;
@@ -140,9 +140,6 @@
 }
 .cm-select.disabled .cm-select-cert:before {
   border-top-color: #eee;
-}
-.cm-select.cm-autocomplete .cm-select-value {
-  display: inline-block;
 }
 .invalid .cm-select .cm-select-value {
   border-color: #E05B5B;

@@ -1,4 +1,4 @@
-define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'utils/omit', 'utils/regs', 'utils/Validation', 'Label', 'core/Ajax', 'Tooltip'], function (module, React, classnames, BaseComponent, grids, Omit, Regs, Validation, Label, Ajax, Tooltip) {
+define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'utils/omit', 'utils/regs', 'utils/Validation', 'Label', 'core/Ajax'], function (module, React, classnames, BaseComponent, grids, Omit, Regs, Validation, Label, Ajax) {
     "use strict";
 
     var _extends = Object.assign || function (target) {
@@ -254,6 +254,7 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
                 if (this.item.props.valueType === 'array') {
                     value = value ? value.split(",") : [];
                 }
+                console.log(value);
 
                 if (rules["required"]) {
                     rule = { method: "required", parameters: rules["required"] };
@@ -396,7 +397,12 @@ define(["module", "react", "classnames", "core/BaseComponent", 'utils/grids', 'u
             key: "renderErrorTip",
             value: function renderErrorTip() {
                 if (this.state.errorTip) {
-                    return React.createElement(Tooltip, { theme: "danger", bindTarget: this, className: "error-tip", align: this._tipAlign, ref: "tooltip", content: this.state.errorTip });
+                    var className = classnames("error-tip", this._tipAlign);
+                    return React.createElement(
+                        "span",
+                        { className: className },
+                        this.state.errorTip
+                    );
                 } else {
                     return null;
                 }

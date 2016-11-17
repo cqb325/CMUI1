@@ -14,7 +14,6 @@ const Validation = require('utils/Validation');
 const Label = require('Label');
 const PropTypes = React.PropTypes;
 const Ajax = require('core/Ajax');
-const Tooltip = require('Tooltip');
 
 
 /**
@@ -217,6 +216,7 @@ class FormControl extends BaseComponent {
         if(this.item.props.valueType === 'array'){
             value = value ? value.split(",") : [];
         }
+        console.log(value);
 
         if(rules["required"]){
             rule = { method: "required", parameters: rules[ "required" ] };
@@ -379,7 +379,8 @@ class FormControl extends BaseComponent {
      */
     renderErrorTip(){
         if(this.state.errorTip){
-            return <Tooltip theme="danger" bindTarget={this} className={"error-tip"} align={this._tipAlign} ref="tooltip" content={this.state.errorTip}/>;
+            let className = classnames("error-tip", this._tipAlign);
+            return (<span className={className}>{this.state.errorTip}</span>);
         }else{
             return null;
         }

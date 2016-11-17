@@ -20,7 +20,22 @@
   }
 
   .error-tip{
+    color: #E05B5B;
+    background: bisque;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-left: 14px;
+    position: absolute;
+    z-index: 10;
     white-space: nowrap;
+    &.top{
+      left: 0;
+      bottom: 100%;
+      margin-bottom: 8px;
+      .arrow-down(7px, #E05B5B, bisque, 30%);
+      margin-left: 0;
+    }
   }
 
   &.inline{
