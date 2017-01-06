@@ -362,7 +362,7 @@ class AutoComplete extends BaseComponent {
 
     render(){
         let {className, disabled, readOnly, style, grid} = this.props;
-        className = classnames("cm-select", getGrid(grid), {
+        className = classnames("cm-select", "cm-autocomplete", getGrid(grid), {
             active: this.state.active,
             disabled: disabled || readOnly,
             dropup: this.state.dropup,

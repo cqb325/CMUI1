@@ -180,7 +180,8 @@ define(["module", "react", "classnames", "core/BaseComponent", "CheckBox", "core
                 var layout = _props3.layout;
 
                 className = classnames(className, 'cm-radio-group', {
-                    stack: layout == "stack"
+                    stack: layout == "stack",
+                    stick: this.props.stick
                 });
 
                 return React.createElement(

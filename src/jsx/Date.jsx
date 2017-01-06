@@ -260,11 +260,11 @@ class Date extends BaseComponent {
         setTimeout(() => {
             this.setState({
                 current: current,
-                value: current.format("YYYY-MM-DD HH:mm:ss")
+                value: current.format("HH:mm:ss")
             });
         }, 0);
 
-        this.valueChange(current.format("YYYY-MM-DD HH:mm:ss"), current.toDate());
+        this.valueChange(current.format("HH:mm:ss"), current.toDate());
         this.emit("selectTime", current.format("HH:mm:ss"));
     }
 

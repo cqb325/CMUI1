@@ -78,7 +78,8 @@ define(["module", "react", "classnames", "core/BaseComponent", 'FontIcon', 'inte
             _this.addState({
                 disabled: props.disabled,
                 raised: false,
-                text: null
+                text: null,
+                active: _this.props.active || false
             });
             return _this;
         }
@@ -120,12 +121,31 @@ define(["module", "react", "classnames", "core/BaseComponent", 'FontIcon', 'inte
                 }
             }
         }, {
+            key: "setActive",
+            value: function setActive(active) {
+                this.setState({ active: active });
+            }
+        }, {
+            key: "getActive",
+            value: function getActive() {
+                return this.state.active;
+            }
+        }, {
+            key: "componentDidMount",
+            value: function componentDidMount() {
+                this._isMounted = true;
+                if (this.props["data-itemBind"]) {
+                    this.props["data-itemBind"](this);
+                }
+            }
+        }, {
             key: "render",
             value: function render() {
-                var className = classnames(this.props.className, 'cm-button', this.state.theme, {
+                var className = classnames(this.props.className, 'cm-button', this.state.theme, this.props.size, {
                     "cm-iconButton": this.props.iconButton,
                     raised: this.props.raised && this.state.raised,
-                    flat: this.props.flat
+                    flat: this.props.flat,
+                    "active": this.state.active
                 });
 
                 var link = this.props.href || "javascript:void(0)";

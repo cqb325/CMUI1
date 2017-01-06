@@ -171,7 +171,9 @@ class Pagination extends BaseComponent {
                     current: current,
                     _current: current
                 });
-                ReactDOM.findDOMNode(this.refs.pageNum).value = current;
+                if(this.refs.pageNum) {
+                    ReactDOM.findDOMNode(this.refs.pageNum).value = current;
+                }
             }
         }
         if(!preventCallback) {
@@ -205,15 +207,15 @@ class Pagination extends BaseComponent {
                 });
             }
 
+            this.update({current: page});
             if(this.props.onChange) {
-                this.update({current: page});
                 this.props.onChange(page, this.state.pageSize);
-                this.emit("change", page, this.state.pageSize);
-            }else{
-                this.goToPage(page);
             }
+            this.emit("change", page, this.state.pageSize);
 
-            ReactDOM.findDOMNode(this.refs.pageNum).value = page;
+            if(this.refs.pageNum) {
+                ReactDOM.findDOMNode(this.refs.pageNum).value = page;
+            }
 
             return page;
         }
@@ -330,7 +332,7 @@ class Pagination extends BaseComponent {
                                          currentIndex={i+1}/>);
             }
             if (edges < interval.start && (interval.start - edges != 1)) {
-                pagerList.push(<li key={"...1"} className="disabled"><span className="ellipse">...</span></li>);
+                pagerList.push(<li key={"...1"} className="disabled"><span className="ellipse">•••</span></li>);
             } else if (interval.start - edges == 1) {
                 pagerList.push(<PageItem key={edges+1} onClick={this._handleChange.bind(this, edges+1)}
                                          currentIndex={edges+1} />);
@@ -344,7 +346,7 @@ class Pagination extends BaseComponent {
 
             if (interval.end < pages && edges > 0) {
                 if (pages - edges > interval.end && (pages - edges - interval.end != 1)) {
-                    pagerList.push(<li key={"...2"} className="disabled"><span className="ellipse">...</span></li>);
+                    pagerList.push(<li key={"...2"} className="disabled"><span className="ellipse">•••</span></li>);
                 } else if (pages - edges - interval.end == 1) {
                     pagerList.push(<PageItem key={interval.end+1} onClick={this._handleChange.bind(this, interval.end+1)}
                                              currentIndex={interval.end+1}/>);

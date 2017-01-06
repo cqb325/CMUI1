@@ -113,7 +113,7 @@ define(['module', 'react', '../BaseDemo', 'classnames', 'Input', 'RadioGroup', "
                     React.createElement(
                         Tile,
                         { header: "禁用" },
-                        React.createElement(RadioGroup, { url: './pages/Form/data.json', value: '0', valueField: 'type', textField: 'name' }),
+                        React.createElement(RadioGroup, { stick: true, url: './pages/Form/area.json', value: '0', valueField: 'type', textField: 'name' }),
                         React.createElement(
                             'pre',
                             { className: 'brush: js', ref: 'code5' },

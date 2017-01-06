@@ -240,7 +240,9 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
                             current: current,
                             _current: current
                         });
-                        ReactDOM.findDOMNode(this.refs.pageNum).value = current;
+                        if (this.refs.pageNum) {
+                            ReactDOM.findDOMNode(this.refs.pageNum).value = current;
+                        }
                     }
                 }
                 if (!preventCallback) {
@@ -268,15 +270,15 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
                         });
                     }
 
+                    this.update({ current: page });
                     if (this.props.onChange) {
-                        this.update({ current: page });
                         this.props.onChange(page, this.state.pageSize);
-                        this.emit("change", page, this.state.pageSize);
-                    } else {
-                        this.goToPage(page);
                     }
+                    this.emit("change", page, this.state.pageSize);
 
-                    ReactDOM.findDOMNode(this.refs.pageNum).value = page;
+                    if (this.refs.pageNum) {
+                        ReactDOM.findDOMNode(this.refs.pageNum).value = page;
+                    }
 
                     return page;
                 }
@@ -366,7 +368,7 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
                             React.createElement(
                                 "span",
                                 { className: "ellipse" },
-                                "..."
+                                "•••"
                             )
                         ));
                     } else if (interval.start - edges == 1) {
@@ -388,7 +390,7 @@ define(["module", "react", "react-dom", "Core", "classnames", "FontIcon", "core/
                                 React.createElement(
                                     "span",
                                     { className: "ellipse" },
-                                    "..."
+                                    "•••"
                                 )
                             ));
                         } else if (pages - edges - interval.end == 1) {

@@ -40,6 +40,10 @@ class PaginationPage extends Component{
 
                     <Pagination shape="none" displayInfo={false} theme="cyan" current={10} pageSize={10} total={1000} onChange={pageChange}></Pagination>
 
+                    <Pagination theme="primary" current={10} pageSize={10} total={1000} onChange={pageChange}></Pagination>
+                    <Pagination shape="circle" theme="primary" current={10} pageSize={10} total={1000} onChange={pageChange}></Pagination>
+                    <Pagination shape="none" displayInfo={false} theme="primary" current={10} pageSize={10} total={1000} onChange={pageChange}></Pagination>
+
                     <pre className="brush: js" ref="code1">
                         {
 `

@@ -1,9 +1,21 @@
+@import "colors";
+
 .cm-checkbox{
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   position: relative;
+  color: #666;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+
+  label{
+    font-weight: 400;
+  }
 
   .cm-checkbox-icon{
     display: inline-block;
@@ -30,5 +42,47 @@
 .cm-radio-group.stack{
   .cm-checkbox{
     display: block;
+  }
+}
+
+.cm-radio-group{
+  .cm-checkbox {
+    .cm-checkbox-icon {
+      background: url(../../imgs/radio.png);
+    }
+    &.active{
+      .cm-checkbox-icon{
+        background: url(../../imgs/radio-checked.png);
+      }
+    }
+  }
+  &.stick{
+    .cm-checkbox{
+      border: 1px solid #d9d9d9;
+      padding: 4px 10px;
+      cursor: pointer;
+      background: #fff;
+      border-left: 1px solid transparent;
+      &.active{
+        border-color: @color-blue;
+        border-left: 1px solid @color-blue!important;
+        color: @color-blue;
+      }
+      &:first-child{
+        border-left: 1px solid #d9d9d9;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+      &:last-child{
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
+      .cm-checkbox-icon{
+        display: none;
+      }
+      label{
+        cursor: pointer;
+      }
+    }
   }
 }

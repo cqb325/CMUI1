@@ -141,7 +141,8 @@ class RadioGroup extends BaseComponent {
             className,
             'cm-radio-group',
             {
-                stack: layout == "stack"
+                stack: layout == "stack",
+                stick: this.props.stick
             }
         );
 

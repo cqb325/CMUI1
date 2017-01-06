@@ -24,7 +24,8 @@ class Button extends BaseComponent {
         this.addState({
             disabled: props.disabled,
             raised: false,
-            text: null
+            text: null,
+            active: this.props.active || false
         });
     }
 
@@ -73,6 +74,14 @@ class Button extends BaseComponent {
         }
     }
 
+    setActive(active){
+        this.setState({active: active});
+    }
+
+    getActive(){
+        return this.state.active;
+    }
+
     handleMouseDown = (event) => {
         if (event.button === 0 && !this.props.disabled) {
             this.setState({
@@ -89,6 +98,13 @@ class Button extends BaseComponent {
         }
     };
 
+    componentDidMount(){
+        this._isMounted = true;
+        if(this.props["data-itemBind"]){
+            this.props["data-itemBind"](this);
+        }
+    }
+
     /**
      * 渲染
      */
@@ -97,10 +113,12 @@ class Button extends BaseComponent {
             this.props.className,
             'cm-button',
             this.state.theme,
+            this.props.size,
             {
                 "cm-iconButton": this.props.iconButton,
                 raised: this.props.raised && this.state.raised,
-                flat: this.props.flat
+                flat: this.props.flat,
+                "active": this.state.active
             }
         );
 

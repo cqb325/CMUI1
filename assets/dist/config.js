@@ -34,7 +34,8 @@
             "velocity": '../lib/velocity.min',
             "store": "../lib/store.min",
             "WebUploader": "../lib/webuploader",
-            "css": '../lib/css.min'
+            "css": '../lib/css.min',
+            "markdown": "../lib/markdown"
         },
         shim: {
 

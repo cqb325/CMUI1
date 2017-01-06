@@ -124,8 +124,8 @@ define(["module", "react", 'react-dom', "classnames", 'Core', 'utils/Dom', 'util
                     hideEvent = void 0;
                 this.status = "hide";
                 if (trigger === "hover") {
-                    showEvent = "mouseover";
-                    hideEvent = "mouseout";
+                    showEvent = "mouseenter";
+                    hideEvent = "mouseleave";
                 } else if (trigger === "toggle") {
                     showEvent = "click";
                 }
@@ -163,7 +163,7 @@ define(["module", "react", 'react-dom', "classnames", 'Core', 'utils/Dom', 'util
             value: function hide(e) {
                 var _this3 = this;
 
-                if (this.status === "show") {
+                if (this.status === "show" && this._isMounted) {
                     (function () {
                         var tip = Dom.dom(ReactDOM.findDOMNode(_this3));
                         _this3._timer = setTimeout(function () {
@@ -185,6 +185,12 @@ define(["module", "react", 'react-dom', "classnames", 'Core', 'utils/Dom', 'util
                 var height = ele.height();
 
                 var tip = ReactDOM.findDOMNode(this);
+
+                if (tip.parentNode == ele[0] && Dom.css(ele[0], "position") === "relative") {
+                    top = 0;
+                    left = 0;
+                }
+
                 Dom.dom(tip).show();
                 var tipWidth = Dom.dom(tip).width();
                 var tipHeight = Dom.dom(tip).height();
@@ -228,6 +234,19 @@ define(["module", "react", 'react-dom', "classnames", 'Core', 'utils/Dom', 'util
                 }
 
                 Dom.dom(tip).css(css);
+            }
+        }, {
+            key: "componentDidMount",
+            value: function componentDidMount() {
+                this._isMounted = true;
+                if (this.props.bindTarget) {
+                    this.bind(this.props.bindTarget);
+                }
+            }
+        }, {
+            key: "componentWillUnmount",
+            value: function componentWillUnmount() {
+                this._isMounted = false;
             }
         }, {
             key: "render",

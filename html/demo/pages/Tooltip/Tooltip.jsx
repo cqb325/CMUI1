@@ -60,6 +60,7 @@ let Page = React.createClass({
                     <div ref="target" style={{width: "100px", height: "100px", "marginTop": "100px", "background": "#ff00ff", "color": "#fff"}}>触发对象</div>
 
                     <Tooltip theme="danger" trigger="none" align="right" ref="tooltip6" content="asdasdasdasdasdasdasdasdasdasda"></Tooltip>
+                    <Tooltip theme="danger" align="top" bindTarget={this} content="asdasdasdasdasdasdasdasdasdasda"></Tooltip>
                     <div ref="target2" style={{width: "100px", height: "100px", "marginTop": "100px", "marginLeft": "400px", "background": "#ff0000", "color": "#fff"}}>提示对象</div>
 
                     <Button theme="success" onClick={this.show}>显示</Button><Button onClick={this.hide} className="ml-10" theme="primary">隐藏</Button>

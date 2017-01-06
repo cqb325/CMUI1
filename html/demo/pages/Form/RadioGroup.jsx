@@ -105,7 +105,7 @@ let groupData2 = [
                 </Tile>
 
                 <Tile header={"禁用"}>
-                    <RadioGroup url="./pages/Form/data.json" value="0" valueField="type" textField="name"></RadioGroup>
+                    <RadioGroup stick={true} url="./pages/Form/area.json" value="0" valueField="type" textField="name"></RadioGroup>
                     <pre className="brush: js" ref="code5">
                         {
 `

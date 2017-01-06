@@ -8,6 +8,45 @@ a:visited {
 a:focus {
   outline: none;
 }
+.cm-button-group .cm-button {
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-top: 1px solid #53b6ff!important;
+  border-bottom: 1px solid #53b6ff!important;
+  border-left: 1px solid #53b6ff!important;
+}
+.cm-button-group .cm-button:first-child {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.cm-button-group .cm-button:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-right: 1px solid #53b6ff!important;
+}
+.cm-button-group .cm-button.active.primary {
+  background: #1D8CE0;
+}
+.cm-button-group .cm-button.success {
+  border-color: #29eb7f !important;
+}
+.cm-button-group .cm-button.success.active {
+  background: #0f9f4f;
+}
+.cm-button-group .cm-button.warning {
+  border-color: #f9ca5b !important;
+}
+.cm-button-group .cm-button.warning.active {
+  background: #e5a409;
+}
+.cm-button-group .cm-button.danger {
+  border-color: #ff7c7c !important;
+}
+.cm-button-group .cm-button.danger.active {
+  background: #ff1616;
+}
 .cm-button {
   position: relative;
   padding: 4px 15px;
@@ -21,14 +60,22 @@ a:focus {
   background: transparent;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   line-height: normal;
-  -webkit-transition: background, -webkit-box-shadow 0.2s linear;
-  -moz-transition: background, -moz-box-shadow 0.2s linear;
-  -ms-transition: background, box-shadow 0.2s linear;
-  -o-transition: background, box-shadow 0.2s linear;
-  transition: background, box-shadow 0.2s linear;
+  -webkit-transition: background0 0.2s linear, -webkit-box-shadow 0.2s linear;
+  -moz-transition: background 0.2s linear, -moz-box-shadow 0.2s linear;
+  -ms-transition: background 0.2s linear, -ms-box-shadow 0.2s linear;
+  -o-transition: background 0.2s linear, -o-box-shadow 0.2s linear;
+  transition: background 0.2s linear, box-shadow 0.2s linear;
   -webkit-box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+}
+.cm-button.large {
+  padding: 6px 15px 6px 15px;
+  font-size: 14px;
+}
+.cm-button.small {
+  padding: 1px 7px;
+  font-size: 12px;
 }
 .cm-button.raised {
   -webkit-box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
@@ -70,43 +117,35 @@ a:focus {
 }
 .cm-button.primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #20A0FF;
+  border-color: #20A0FF;
 }
 .cm-button.primary:hover {
-  background-color: #4f93ce;
+  background-color: #53b6ff;
 }
 .cm-button.success {
   color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #13CE66;
+  border-color: #13CE66;
 }
 .cm-button.success:hover {
-  background-color: #80c780;
-}
-.cm-button.info {
-  color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
-}
-.cm-button.info:hover {
-  background-color: #85d0e7;
+  background-color: #29eb7f;
 }
 .cm-button.warning {
   color: #fff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  background-color: #F7BA2A;
+  border-color: #F7BA2A;
 }
 .cm-button.warning:hover {
-  background-color: #f4c37d;
+  background-color: #f9ca5b;
 }
 .cm-button.danger {
   color: #fff;
-  background-color: #d9534f;
-  border-color: #d43f3a;
+  background-color: #FF4949;
+  border-color: #FF4949;
 }
 .cm-button.danger:hover {
-  background-color: #e27c79;
+  background-color: #ff7c7c;
 }
 .cm-button[disabled] {
   color: rgba(0, 0, 0, 0.3);

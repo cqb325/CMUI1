@@ -1,6 +1,7 @@
-@borderColor: #ddd;
-@textColor: #797979;
+@borderColor: #ededed;
+@textColor: #666;
 @cyanColor: #1bB47C;
+@import "colors";
 
 .cm-pagination{
   overflow: hidden;
@@ -25,6 +26,9 @@
       border-right: none;
       background: #fff;
     }
+    a:hover{
+      color: @color-blue;
+    }
 
     &.disabled{
       a{
@@ -42,18 +46,18 @@
       border-radius: 0 2px 2px 0;
     }
     &.active>a{
-      background: #428bca;
+      background: @color-blue;
       color: #fff;
-      border-color: #428bca;
+      border-color: @color-blue;
     }
   }
 
   &.default{
     li{
       &.active>a{
-        background: #428bca;
+        background: @color-blue;
         color: #fff;
-        border-color: #428bca;
+        border-color: @color-blue;
       }
     }
   }
@@ -102,8 +106,38 @@
         color: #fff;
       }
       &.active a{
-        background: darken(@cyanColor, 20%);
-        border-color: darken(@cyanColor, 20%);
+        background: darken(@cyanColor, 10%);
+        border-color: darken(@cyanColor, 10%);
+        -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .2);
+        -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, .2);
+        box-shadow: inset 0 0 15px rgba(0, 0, 0, .2);
+      }
+    }
+  }
+
+  &.primary{
+    color: @color-blue;
+    &.none{
+      li{
+        >a,
+        >span.ellipse{
+          border-color: @color-blue;
+        }
+      }
+    }
+    li{
+      >a,
+      >span.ellipse{
+        background: @color-blue;
+        border-color: @color-blue-dark;
+        color: #fff;
+      }
+      &.active a{
+        background: darken(@color-blue, 10%);
+        border-color: darken(@color-blue, 10%);
+        -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .2);
+        -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, .2);
+        box-shadow: inset 0 0 15px rgba(0, 0, 0, .2);
       }
     }
   }

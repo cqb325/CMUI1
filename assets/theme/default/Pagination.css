@@ -2,7 +2,7 @@
   overflow: hidden;
   font-size: 12px;
   line-height: normal;
-  color: #797979;
+  color: #666;
   margin: 15px 0;
 }
 .cm-pagination ul {
@@ -17,10 +17,13 @@
 .cm-pagination li .ellipse {
   display: inline-block;
   padding: 5px 10px;
-  color: #797979;
-  border: 1px solid #ddd;
+  color: #666;
+  border: 1px solid #ededed;
   border-right: none;
   background: #fff;
+}
+.cm-pagination li a:hover {
+  color: #20A0FF;
 }
 .cm-pagination li.disabled a {
   cursor: not-allowed;
@@ -29,18 +32,18 @@
   border-radius: 2px 0 0 2px;
 }
 .cm-pagination li:last-child > a {
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #ededed;
   border-radius: 0 2px 2px 0;
 }
 .cm-pagination li.active > a {
-  background: #428bca;
+  background: #20A0FF;
   color: #fff;
-  border-color: #428bca;
+  border-color: #20A0FF;
 }
 .cm-pagination.default li.active > a {
-  background: #428bca;
+  background: #20A0FF;
   color: #fff;
-  border-color: #428bca;
+  border-color: #20A0FF;
 }
 .cm-pagination .pageNum {
   width: 40px;
@@ -62,7 +65,7 @@
   padding: 0;
   text-align: center;
   line-height: 26px;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #ededed;
 }
 .cm-pagination.circle li:first-child > a,
 .cm-pagination.circle li:last-child > a {
@@ -78,6 +81,29 @@
   color: #fff;
 }
 .cm-pagination.cyan li.active a {
-  background: #0e5b3f;
-  border-color: #0e5b3f;
+  background: #14885d;
+  border-color: #14885d;
+  -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.cm-pagination.primary {
+  color: #20A0FF;
+}
+.cm-pagination.primary.none li > a,
+.cm-pagination.primary.none li > span.ellipse {
+  border-color: #20A0FF;
+}
+.cm-pagination.primary li > a,
+.cm-pagination.primary li > span.ellipse {
+  background: #20A0FF;
+  border-color: #1D8CE0;
+  color: #fff;
+}
+.cm-pagination.primary li.active a {
+  background: #0087ec;
+  border-color: #0087ec;
+  -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
 }

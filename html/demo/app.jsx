@@ -12,7 +12,10 @@ const IndexLink = ReactRouter.Link;
 const APP = {
     sysName: "CMUI",
     menus: [
-        {id:"1", text: "Button",icon: "fa fa-square",link: "Button"},
+        {id:"1", text: "Button",icon: "fa fa-square",children:[
+            {id:"11", text: "Button",icon: "fa fa-square", link: "Button"},
+            {id:"12", text: "ButtonGroup",icon: "fa fa-square", link: "ButtonGroup"},
+        ]},
         {id:"2", text: "DateTime",icon: "fa fa-calendar",link: "DateTime"},
         {id:"3", text: "Grids",icon: "fa fa-th",link: "Grids"},
         {id:"4", text: "FontIcon",icon: "fa fa-flag", children: [
@@ -51,7 +54,10 @@ const APP = {
         ]},
         {id:"16", text: "Divider",icon: "fa fa-cog",link: "Divider"},
         {id:"17", text: "AutoComplete",icon: "fa fa-cog",link: "AutoComplete"},
-        {id:"18", text: "Tooltip",icon: "fa fa-cog",link: "Tooltip/Tooltip"}
+        {id:"18", text: "Tooltip",icon: "fa fa-cog",link: "Tooltip/Tooltip"},
+        {id:"19", text: "Affix",icon: "fa fa-cog",link: "Affix"},
+        {id:"20", text: "Steps",icon: "fa fa-cog",link: "Steps"},
+        {id:"21", text: "Switch",icon: "fa fa-cog",link: "Switch"}
     ]
 };
 

@@ -764,7 +764,7 @@ define(['module', './classes', './mutation'], function (module, classes, mutatio
 
     proto.getStyle = function (prop) {
         var el = this[0];
-        if (el) return el.style[prop];
+        if (el) return Dom.css(el, prop);
     };
     proto.parent = function () {
         var els = [];
@@ -854,6 +854,26 @@ define(['module', './classes', './mutation'], function (module, classes, mutatio
         } else {
             return this[0].offsetHeight;
         }
+    };
+
+    proto.offset = function () {
+        if (this.length) {
+            var ele = this[0];
+            var actualLeft = ele.offsetLeft;
+            var actualTop = ele.offsetTop;
+            var current = ele.offsetParent;
+            while (current !== null && current.tagName !== "BODY") {
+                actualLeft += current.offsetLeft;
+                actualTop += current.offsetTop;
+                current = current.offsetParent;
+            }
+
+            return {
+                top: actualTop,
+                left: actualLeft
+            };
+        }
+        return null;
     };
 
     module.exports = Dom;

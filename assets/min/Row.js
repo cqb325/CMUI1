@@ -1,0 +1,2 @@
+/** ! created at <%= grunt.template.today("yyyy-mm-dd") by cqb %> */
+define(["module","react","classnames"],function(a,b,c){"use strict";var d=b.createClass({displayName:"Col",render:function(){var a=c("cm-row",this.props.className),d=this.props.component||"div";return b.createElement(d,{className:a,style:this.props.style},this.props.children)}});a.exports=d});

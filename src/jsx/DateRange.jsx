@@ -357,11 +357,13 @@ class DateRange extends BaseComponent {
     checkIsSibling(start, end){
         let startDate = this.refs.startDate,
             endDate = this.refs.endDate;
-        start = start || startDate.state.current;
-        end = end || endDate.state.current;
+        start = moment(start || startDate.state.current);
+        start.set("date", 1);
+        start.add(1, "month");
+        end = moment(end || endDate.state.current);
 
         let isSibling = false;
-        if(start.get("month") == end.get("month") - 1 && start.get("year") == end.get("year")){
+        if(start.get("month") == end.get("month") && start.get("year") == end.get("year")){
             isSibling = true;
         }
 

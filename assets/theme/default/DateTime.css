@@ -55,6 +55,7 @@
   display: inline-block;
   background-color: #fff;
   background-image: none;
+  font-size: 13px;
   transition: border-color ease-in-out 0.15s;
   cursor: pointer;
 }
@@ -63,6 +64,10 @@
 }
 .cm-datetime.disabled .date-text {
   cursor: default;
+  color: #888;
+}
+.cm-datetime.disabled i {
+  color: #888;
 }
 .cm-datetime i.fa-calendar {
   position: absolute;
